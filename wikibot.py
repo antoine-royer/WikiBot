@@ -9,6 +9,8 @@ from eliza_lib import eliza
 client = discord.Client()
 token = os.environ["token"]
 
+forbidden = [565177655645962242]
+
 
 def page_content(name, limit = 1000):
   def image_detect(img):
@@ -94,20 +96,22 @@ async def on_message(message):
   if not len(language): language = "en"
   wikipedia.set_lang(language)
 
-
-  if not msg_content[0].find("r "):
+  if message.author.id in forbidden:
+    rep = "Due to an inappropriate attitude, WikiBot has decided to stop answering your fucking requests."
+    
+  elif not msg_content[0].find("r "):
     rep = page_random(msg_content[0][2:])
     
   elif not msg_content[0].find("a "):
     rep = page_read(msg_content[0][2:])
 
-  elif not msg_content[0].find("s"):
+  elif not msg_content[0].find("s "):
     rep = page_search(msg_content[0][2:])
 
-  elif not msg_content[0].find("t"):
+  elif not msg_content[0].find("t "):
     rep = translation(msg_content[0][2:], language)
 
-  elif not msg_content[0].find("e"):
+  elif not msg_content[0].find("e "):
     rep = eliza_call(msg_content[0][2:])
 
   elif msg_content[0] == "help":
