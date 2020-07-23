@@ -31,7 +31,7 @@ reflections = {
     "myself": "yourself",
     "yourself": "myself"
 }
-psychobabble = [
+available_answer = [
 
     [r"(.*) sorry(.*)?",
      ["There are many times when no apology is needed.",
