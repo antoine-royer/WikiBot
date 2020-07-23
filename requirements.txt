@@ -1,0 +1,4 @@
+discord
+wikipedia
+requests
+googletrans
