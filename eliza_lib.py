@@ -33,7 +33,7 @@ reflections = {
 }
 psychobabble = [
 
-    [r"(.*) sorry (.*)",
+    [r"(.*) sorry(.*)?",
      ["There are many times when no apology is needed.",
       "What feelings do you have when you apologize ? Any relief ?",
       "Sometimes apologies are due to prior trauma. Does that remind you something ?",
@@ -107,10 +107,11 @@ psychobabble = [
       "If {0}, what else must be true ?",
       "Are you really statisfied about this reason ?"]],
 
-    [r"Hello(.*)",
+    [r"(Hello(.*)?)|(Hi(.*)?)|(Hey(.*)?)",
      ["Hello… I'm glad you could drop by today.",
       "Hi there… how are you today ?",
-      "Hello, how are you feeling today ?"]],
+      "Hello, how are you feeling today ?",
+      "Hey ! I'm Eliza, what I can do for you ?"]],
 
     [r"I think (.*)",
      ["Do you doubt {0} ?",
@@ -118,12 +119,12 @@ psychobabble = [
       "But you're not sure {0} ?",
       "Is that thought coming from you ?"]],
 
-    [r"(.*) friend (.*)",
+    [r"(.*) friend(.*)",
      ["Tell me more about your friends.",
       "When you think of a friend, what comes to mind ?",
       "Why don't you tell me about a childhood friend ?"]],
 
-    [r"Yes",
+    [r"(Yes)|(Yeah)",
      ["You seem quite sure.",
       "OK, but can you elaborate a bit ?",
       "Are you trying to convince me or are you trying to convince yourself ?"]],
@@ -138,10 +139,8 @@ psychobabble = [
      ["Do you think it is {0} ?",
       "Perhaps it's {0} — what do you think ?",
       "If it were {0}, what would you do ?",
-      "It could well be that {0}."]],
-
-    [r"It is (.*)",
-     ["You seem very certain.",
+      "It could well be that {0}.",
+      "You seem very certain.",
       "If I told you that it probably isn't {0}, what would you feel ?"]],
 
     [r"Can you ([^\ ?]*)\ ? ?",
@@ -204,7 +203,7 @@ psychobabble = [
 
     [r"Why (.*)",
      ["Why don't you tell me the reason why {0} ?",
-      "Why do you think {0} ?"]],
+      "Why do you think {0} ?""]],
 
     [r"I want (.*)",
      ["What would it mean to you if you got {0} ?",
@@ -213,7 +212,7 @@ psychobabble = [
       "If you got {0}, then what would you do ?",
       "Why you want {0} ? Will it make you happier ?"]],
 
-    [r"(.*) mother(.*)",
+    [r"(.*) mother(.*)?",
      ["Tell me more about your mother.",
       "What was your relationship with your mother like ?",
       "How do you feel about your mother ?",
@@ -223,7 +222,7 @@ psychobabble = [
       "Try to tell me what fells your mother now.",
       "Often the adult unconsciously reproduces what the child has experienced. How do you see yourself as a parent ?"]],
 
-    [r"(.*) father(.*)",
+    [r"(.*) father(.*)?",
      ["Tell me more about your father.",
       "How did your father make you feel ?",
       "How do you feel about your father ?",
@@ -231,7 +230,7 @@ psychobabble = [
       "Do you have trouble showing affection with your family ?",
       "The father is an important figure in the construction of the child. He contributes to the child's self-confidence, self-esteem, and a sense of protection."]],
 
-    [r"(.*) child(.*)",
+    [r"(.*) child(.*)?",
      ["Did you have close friends as a child ?",
       "What is your favorite childhood memory ?",
       "Do you remember any dreams or nightmares from childhood ?",
@@ -239,7 +238,7 @@ psychobabble = [
       "Many adult behaviours and emotions are dictated by childhood. Maybe an introspection in your childhoob will be interessting ?",
       "How do you think your childhood experiences relate to your feelings today ?"]],
 
-    [r"(.*)\? ?",
+    [r"(.*)\ ?",
      ["Why do you ask that ?",
       "Please consider whether you can answer your own question.",
       "Perhaps the answer lies within yourself ?",
@@ -247,11 +246,11 @@ psychobabble = [
       "What does this question mean to you ?",
       "I'm sure you know the answer…"]],
 
-    [r"Bye",
+    [r"(Bye(.*)?)|(Good bye(.*)?)|(See you(.*)?)",
      ["Thank you for talking with me.",
       "Good-bye.",
-      "Thank you, that will be $150.  Have a good day!",
-      "I hope you "]],
+      "Thank you, that will be $150. Have a good day!",
+      "I hope you."]],
 
     [r"(.*)",
      ["Please tell me more.",
@@ -273,12 +272,10 @@ def reflect(fragment):
       tokens[i] = reflections[token]
   return " ".join(tokens)
   
-def analyze(statement):
-  for pattern, responses in psychobabble:
-    match = re.match(pattern, statement.rstrip(".!"))
+def eliza(msg_input):
+  for pattern, responses in available_answer:
+    match = re.match(pattern, msg_input.rstrip(".!"))
     if match:
       response = choice(responses)
-      return response.format(*[reflect(g) for g in match.groups()])
+      return response.format(*[reflect(group) for group in match.groups()])
 
-def eliza(msg_input):
-  return analyze(msg_input)
