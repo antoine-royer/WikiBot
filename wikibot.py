@@ -9,9 +9,6 @@ from eliza_lib import eliza
 client = discord.Client()
 token = os.environ["token"]
 
-forbidden = [565177655645962242]
-
-
 def page_content(name, limit = 1000):
   def image_detect(img):
     for i in img:
@@ -82,6 +79,8 @@ def eliza_call(message):
   if language.detect(message).lang != "en":
     return "I'm sorry, I only speak english…"
   return eliza(message)
+
+forbidden = []
 
 @client.event
 async def on_message(message):

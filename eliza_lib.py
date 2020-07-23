@@ -3,20 +3,31 @@ from random import choice
 
 reflections = {
     "am": "are",
-    "was": "were",
-    "i": "you",
-    "i'd": "you would",
-    "i've": "you have",
-    "i'll": "you will",
-    "i'm": "you are",
-    "my": "your",
     "are": "am",
-    "you've": "I have",
-    "you'll": "I will",
+    "was": "were",
+    "were": "was",
+    
+    "i": "you",
+    "you": "i",
+    
+    "i'd": "you would",
+    "you'ld": "i would",
+    
+    "i've": "you have",
+    "you've": "i have",
+    
+    "i'll": "you will",
+    "you'll": "i will",
+    
+    "i'm": "you are",
+    "you're": "i am",
+    
+    "my": "your",
     "your": "my",
+
+    "mine": "yours",
     "yours": "mine",
-    "you": "me",
-    "me": "you",
+    
     "myself": "yourself",
     "yourself": "myself"
 }
