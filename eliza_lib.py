@@ -8,6 +8,7 @@ reflections = {
     "i'd": "you would",
     "i've": "you have",
     "i'll": "you will",
+    "i'm": "you are",
     "my": "your",
     "are": "am",
     "you've": "I have",
@@ -15,9 +16,18 @@ reflections = {
     "your": "my",
     "yours": "mine",
     "you": "me",
-    "me": "you"
+    "me": "you",
+    "myself": "yourself",
+    "yourself": "myself"
 }
 psychobabble = [
+
+    [r"(.*) sorry (.*)",
+     ["There are many times when no apology is needed.",
+      "What feelings do you have when you apologize ? Any relief ?",
+      "Sometimes apologies are due to prior trauma. Does that remind you something ?",
+      "Don't apologize and try to understand why you're apologizing."]],
+  
     [r"I need (.*)",
      ["Why do you need {0} ?",
       "Would it really help you to get {0} ?",
@@ -85,12 +95,6 @@ psychobabble = [
       "Does that reason apply to anything else ?",
       "If {0}, what else must be true ?",
       "Are you really statisfied about this reason ?"]],
-
-    [r"(.*) sorry (.*)",
-     ["There are many times when no apology is needed.",
-      "What feelings do you have when you apologize ? Any relief ?",
-      "Sometimes apologies are due to prior trauma. Does that remind you something ?",
-      "Don't apologize and try to understand why you're apologizing."]],
 
     [r"Hello(.*)",
      ["Hello… I'm glad you could drop by today.",
