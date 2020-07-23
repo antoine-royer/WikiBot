@@ -238,7 +238,7 @@ available_answer = [
       "Many adult behaviours and emotions are dictated by childhood. Maybe an introspection in your childhoob will be interessting ?",
       "How do you think your childhood experiences relate to your feelings today ?"]],
 
-    [r"(.*)\ ?",
+    [r"(.*)\?",
      ["Why do you ask that ?",
       "Please consider whether you can answer your own question.",
       "Perhaps the answer lies within yourself ?",
@@ -266,16 +266,17 @@ available_answer = [
 ]
 
 def reflect(fragment):
-  tokens = fragment.lower().split()
-  for i, token in enumerate(tokens):
-    if token in reflections:
-      tokens[i] = reflections[token]
-  return " ".join(tokens)
+  if fragment:
+    tokens = fragment.lower().split()
+    for i, token in enumerate(tokens):
+      if token in reflections:
+        tokens[i] = reflections[token]
+    return " ".join(tokens)
   
 def eliza(msg_input):
   for pattern, responses in available_answer:
     match = re.match(pattern, msg_input.rstrip(".!"))
     if match:
       response = choice(responses)
-      return response.format(*[reflect(group) for group in match.groups()])
+      return response.format(*[reflect(gr) for gr in match.groups()])
 
