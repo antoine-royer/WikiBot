@@ -142,7 +142,7 @@ psychobabble = [
     [r"You are (.*)",
      ["Why do you think I am {0} ?",
       "Does it please you to think that I'm {0} ?",
-      "Perhaps you would like me to be {0}.",
+      "Perhaps you would like me to be {0}. Try to understand why.",
       "Perhaps you're really talking about yourself ?"]],
 
     [r"You\' ?re (.*)",
@@ -224,8 +224,8 @@ psychobabble = [
       "Many adult behaviours and emotions are dictated by childhood. Maybe an introspection in your childhoob will be interessting ?",
       "How do you think your childhood experiences relate to your feelings today ?"]],
 
-    [r"(.*) ?",
-     ["Why do you ask that?",
+    [r"(.*)\? ?",
+     ["Why do you ask that ?",
       "Please consider whether you can answer your own question.",
       "Perhaps the answer lies within yourself?",
       "Why don't you tell me ?",
@@ -263,7 +263,7 @@ def analyze(statement):
     match = re.match(pattern, statement.rstrip(".!"))
     if match:
       response = choice(responses)
-  return response.format(*[reflect(g) for g in match.groups()])
+      return response.format(*[reflect(g) for g in match.groups()])
 
 def eliza(msg_input):
   return analyze(msg_input)
