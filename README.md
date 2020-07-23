@@ -2,14 +2,6 @@
 
 ## General
 
-```
-                                                  BBBB
-WW     WWW    WW   IIIIIIII   KK KK    IIIIIIII   BB  B    OOO    TTTTTTTT
-WW    WW WW   WW      II      KKK         II      BBBB    O   O      TT
- WW  WWW WWW WW       II      KK K        II      BB  B   O   O      TT
-   WWWW   WWWW     IIIIIIII   KK  KK   IIIIIIII   BBBB     OOO       TT
-```
-
 ### Presentation
 
 WikiBot is a discord bot who can do several things like make a wikipedia research, translate a text or discuss with you.
@@ -43,7 +35,7 @@ This code was provided with license GNU General Public License v3.0.
 
 `/e message`
 
-## `language` parameter
+## language parameter
 
 This argument allows you to choose the language of article on wikipedia or the destination language for translations. This parameter is optionnal, per default language is set on english. For change this, please use ISO abbreviations.
 
@@ -71,3 +63,5 @@ Returns the text translated in german.
 ### ELIZA chatbot
 
 ELIZA only understand english.
+
+`/e Hello` is a good to start conversation
