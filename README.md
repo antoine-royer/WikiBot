@@ -64,4 +64,4 @@ Returns the text translated in german.
 
 ELIZA only understand english.
 
-`/e Hello` is a good to start conversation
+`/e Hello`
