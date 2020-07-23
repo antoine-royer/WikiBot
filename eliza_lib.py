@@ -39,19 +39,19 @@ available_answer = [
       "Sometimes apologies are due to prior trauma. Does that remind you something ?",
       "Don't apologize and try to understand why you're apologizing."]],
   
-    [r"I need (.*)",
+    [r"i need (.*)",
      ["Why do you need {0} ?",
       "Would it really help you to get {0} ?",
       "Are you sure you need {0} ?",
       "What sensations, emotions make you want to desire {0} ?"]],
 
-    [r"Why don\' ?t you ([^\ ?]*)\ ? ?",
+    [r"why don't you ([^\ ?]*)\ ? ?",
      ["Do you really think I don't {0}",
       "Perhaps eventually I will {0}",
       "Do you really want me to {0}",
       "It's up to you to talk to me."]],
 
-    [r"Why can\' ?t I ([^\ ?]*)\ ? ?",
+    [r"why can't I ([^\ ?]*)\ ? ?",
      ["Do you think you should be able to {0} ?",
       "If you could {0}, what would you do ?",
       "I don't know — why can't you {0} ?",
@@ -59,7 +59,7 @@ available_answer = [
       "I think you have to try",
       "You should be more confident."]],
 
-    [r"I can\' ?t (.*)",
+    [r"i can't (.*)",
      ["How do you know you can't {0} ?",
       "Perhaps you could {0} if you tried.",
       "What would it take for you to {0} ?",
@@ -67,53 +67,53 @@ available_answer = [
       "What does '{0}' mean to you ? What feelings does it evoke for you ? Is it happy, sad ?",
       "What does the notion of failure mean to you ? Success ? Is it up to you to make your own choices ?"]],
 
-    [r"I am (.*)",
+    [r"i am (.*)",
      ["Did you come to me because you are {0} ?",
       "How long have you been {0} ?",
       "How do you feel about being {0} ?",
       "Trying to tell me why you're {0}.",
       "Why are you telling me you're {0}? Do you hope, do you want, to understanding yourself ?"]],
 
-    [r"I\' ?m (.*)",
+    [r"i'm (.*)",
      ["How does being {0} make you feel ?",
       "Do you enjoy being {0} ?",
       "Why do you tell me you're {0} ?",
       "Why do you think you're {0} ?",
       "Are you happy with your current situation ?"]],
 
-    [r"Are you ([^\ ?]*)\ ? ?",
+    [r"are you ([^\ ?]*)\ ? ?",
      ["Why does it matter whether I am {0} ?",
       "Would you prefer it if I were not {0} ?",
       "Perhaps you believe I am {0}.",
       "I may be {0} — what do you think ?"]],
 
-    [r"What (.*)",
+    [r"what (.*)",
      ["Why do you ask ?",
       "How would an answer to that help you ?",
       "What do you think ?",
       "I think the question itself is less interesting than the reasons why you asked it.",
       "What does asking the question mean to you?"]],
 
-    [r"How (.*)",
+    [r"how (.*)",
      ["How do you suppose ?",
       "Perhaps you can answer your own question.",
       "What is it you're really asking ?",
       "By what means can you achieve your goals ?"]],
 
-    [r"Because (.*)",
+    [r"because (.*)",
      ["Is that the real reason ?",
       "What other reasons come to mind ?",
       "Does that reason apply to anything else ?",
       "If {0}, what else must be true ?",
       "Are you really statisfied about this reason ?"]],
 
-    [r"(Hello(.*)?)|(Hi(.*)?)|(Hey(.*)?)",
+    [r"(hello(.*)?)|(hi(.*)?)|(hey(.*)?)",
      ["Hello… I'm glad you could drop by today.",
       "Hi there… how are you today ?",
       "Hello, how are you feeling today ?",
       "Hey ! I'm Eliza, what I can do for you ?"]],
 
-    [r"I think (.*)",
+    [r"i think (.*)",
      ["Do you doubt {0} ?",
       "Do you really think so ?",
       "But you're not sure {0} ?",
@@ -124,7 +124,7 @@ available_answer = [
       "When you think of a friend, what comes to mind ?",
       "Why don't you tell me about a childhood friend ?"]],
 
-    [r"(Yes)|(Yeah)",
+    [r"(yes)|(yeah)|(yup)|(yep)",
      ["You seem quite sure.",
       "OK, but can you elaborate a bit ?",
       "Are you trying to convince me or are you trying to convince yourself ?"]],
@@ -135,7 +135,7 @@ available_answer = [
       "How do computers make you feel ?",
       "Do you feel threatened by computers ?"]],
 
-    [r"Is it (.*)",
+    [r"is it (.*)",
      ["Do you think it is {0} ?",
       "Perhaps it's {0} — what do you think ?",
       "If it were {0}, what would you do ?",
@@ -143,69 +143,69 @@ available_answer = [
       "You seem very certain.",
       "If I told you that it probably isn't {0}, what would you feel ?"]],
 
-    [r"Can you ([^\ ?]*)\ ? ?",
+    [r"can you ([^\ ?]*)\ ? ?",
      ["What makes you think I can't {0} ?",
       "If I could {0}, then what ?",
       "Why do you ask if I can {0} ?"]],
 
-    [r"Can I ([^\ ?]*)\ ? ?",
+    [r"can i ([^\ ?]*)\ ? ?",
      ["Perhaps you don't want to {0}.",
       "Do you want to be able to {0} ?",
       "If you could {0}, would you ?"]],
 
-    [r"You are (.*)",
+    [r"you are (.*)",
      ["Why do you think I am {0} ?",
       "Does it please you to think that I'm {0} ?",
       "Perhaps you would like me to be {0}. Try to understand why.",
       "Perhaps you're really talking about yourself ?"]],
 
-    [r"You\' ?re (.*)",
+    [r"you're (.*)",
      ["Why do you say I am {0} ?",
       "Why do you think I am {0} ?",
       "Are we talking about you, or me ?"]],
 
-    [r"I don\' ?t (.*)",
+    [r"i don't ([^\ ?]*)",
      ["Don't you really {0} ?",
       "Why don't you {0} ?",
       "Do you want to {0} ?"]],
 
-    [r"I feel (.*)",
+    [r"i feel (.*)",
      ["Good, tell me more about these feelings.",
       "Do you often feel {0} ?",
       "When do you usually feel {0} ?",
       "When you feel {0}, what do you do ?",
       "Do you feel {0} in a particular situation, is it pleasant ?"]],
 
-    [r"I have (.*)",
+    [r"i have (.*)",
      ["Why do you tell me that you've {0} ?",
       "Have you really {0} ?",
       "Now that you have {0}, what will you do next ?"]],
 
-    [r"I would (.*)",
+    [r"i would (.*)",
      ["Could you explain why you would {0} ?",
       "Why would you {0} ?",
       "Who else knows that you would {0} ?"]],
 
-    [r"Is there (.*)",
+    [r"is there (.*)",
      ["Do you think there is {0} ?",
       "It's likely that there is {0}.",
       "Would you like there to be {0} ?"]],
 
-    [r"My (.*)",
+    [r"my (.*)",
      ["I see, your {0}.",
       "Why do you say that your {0} ?",
-      "When your {0}, how do you feel ?"]],
+      "When your {0} Okay… How do you feel it ?"]],
 
-    [r"You (.*)",
+    [r"you (.*)",
      ["We should be discussing you, not me.",
       "Why do you say that about me ?",
       "Why do you care whether I {0} ?"]],
 
-    [r"Why (.*)",
+    [r"why (.*)",
      ["Why don't you tell me the reason why {0} ?",
       "Why do you think {0} ?"]],
 
-    [r"I want (.*)",
+    [r"i want (.*)",
      ["What would it mean to you if you got {0} ?",
       "Why do you want {0} ?",
       "What would you do if you got {0} ?",
@@ -246,7 +246,7 @@ available_answer = [
       "What does this question mean to you ?",
       "I'm sure you know the answer…"]],
 
-    [r"(Bye(.*)?)|(Good bye(.*)?)|(See you(.*)?)",
+    [r"((.*)?bye(.*)?)|((.*)?good bye(.*)?)|((.*)?see you(.*)?)",
      ["Thank you for talking with me.",
       "Good-bye.",
       "Thank you, that will be $150. Have a good day!",
@@ -267,16 +267,17 @@ available_answer = [
 
 def reflect(fragment):
   if fragment:
-    tokens = fragment.lower().split()
+    tokens = fragment.split()
     for i, token in enumerate(tokens):
       if token in reflections:
         tokens[i] = reflections[token]
     return " ".join(tokens)
   
 def eliza(msg_input):
+  msg_input = msg_input.lower()
   for pattern, responses in available_answer:
     match = re.match(pattern, msg_input.rstrip(".!"))
     if match:
       response = choice(responses)
       return response.format(*[reflect(gr) for gr in match.groups()])
-
+  
