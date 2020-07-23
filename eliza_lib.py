@@ -203,7 +203,7 @@ psychobabble = [
 
     [r"Why (.*)",
      ["Why don't you tell me the reason why {0} ?",
-      "Why do you think {0} ?""]],
+      "Why do you think {0} ?"]],
 
     [r"I want (.*)",
      ["What would it mean to you if you got {0} ?",
