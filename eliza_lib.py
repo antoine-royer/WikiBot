@@ -250,14 +250,15 @@ available_answer = [
       "Many adult behaviours and emotions are dictated by childhood. Maybe an introspection in your childhoob will be interessting ?",
       "How do you think your childhood experiences relate to your feelings today ?"]],
 
-    [r"((.*)?i dreamt of (.*))|((.*)?i've dreamed of (.*))",
+    [r"(.*)?i dreamt of ([^(.|\?|!|…|,|;|:)]*)",
      ["You talk about your dreams, very good idea !",
       "Tell me more about your dreams…",
-      "What do you remember about your dreams, nightmares, maybe your childhood's fears… ?"
+      "What do you remember about your dreams, nightmares, maybe your childhood's fears… ?",
       "Do you make nightmares ?",
+      "What you can deduce of that ?",
       "What do your dreams remind you of ?",
       "Do you see people you know in your dreams ?",
-      "Dreams can help you to understand yourself, try to figure out why you dreamt of that."]],
+      "Dreams can help you to understand yourself, try to figure out why you dreamt of {1}."]],
     
     [r"(.*)\?",
      ["Why do you ask that ?",
@@ -297,7 +298,7 @@ def reflect(fragment):
 def eliza(msg_input):
   msg_input = msg_input.lower()
   for pattern, responses in available_answer:
-    match = re.match(pattern, msg_input.rstrip(".!"))
+    match = re.match(pattern, msg_input.rstrip(".!…"))
     if match:
       response = choice(responses)
       return response.format(*[reflect(gr) for gr in match.groups()])
