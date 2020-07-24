@@ -31,6 +31,7 @@ reflections = {
     "myself": "yourself",
     "yourself": "myself"
 }
+
 available_answer = [
 
     [r"(.*) sorry(.*)?",
@@ -38,6 +39,10 @@ available_answer = [
       "What feelings do you have when you apologize ? Any relief ?",
       "Sometimes apologies are due to prior trauma. Does that remind you something ?",
       "Don't apologize and try to understand why you're apologizing."]],
+
+    [r"((.*) thank you(.*)?)|((.*) thanks(.*)?)",
+     ["But… you're welcome !",
+      "Don't thanks me and take care about yourself."]],
   
     [r"i need (.*)",
      ["Why do you need {0} ?",
@@ -245,6 +250,15 @@ available_answer = [
       "Many adult behaviours and emotions are dictated by childhood. Maybe an introspection in your childhoob will be interessting ?",
       "How do you think your childhood experiences relate to your feelings today ?"]],
 
+    [r"((.*)?i dreamt of (.*))|((.*)?i've dreamed of (.*))",
+     ["You talk about your dreams, very good idea !",
+      "Tell me more about your dreams…",
+      "What do you remember about your dreams, nightmares, maybe your childhood's fears… ?"
+      "Do you make nightmares ?",
+      "What do your dreams remind you of ?",
+      "Do you see people you know in your dreams ?",
+      "Dreams can help you to understand yourself, try to figure out why you dreamt of that."]],
+    
     [r"(.*)\?",
      ["Why do you ask that ?",
       "Please consider whether you can answer your own question.",
