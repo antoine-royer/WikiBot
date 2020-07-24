@@ -81,11 +81,18 @@ available_answer = [
       "Why do you think you're {0} ?",
       "Are you happy with your current situation ?"]],
 
-    [r"are you ([^\ ?]*)\ ? ?",
+    [r"am i ([^\?]*) ?",
+     ["Do you want to be {0} ?",
+      "Why do you want to know if you're {0} ?",
+      "Do you really think you're not {0} ? Maybe you are {0} ?",
+      "What can you do to become {0} ?",
+      "What would you get out of being {0} ?"]],
+    
+    [r"are you (.*)\?",
      ["Why does it matter whether I am {0} ?",
       "Would you prefer it if I were not {0} ?",
       "Perhaps you believe I am {0}.",
-      "I may be {0} — what do you think ?"]],
+      "I may be {0}… what do you think about ?"]],
 
     [r"what (.*)",
      ["Why do you ask ?",
