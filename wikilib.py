@@ -1,6 +1,5 @@
 import wikipedia
 from googletrans import Translator
-from urllib.parse import quote_plus
 from eliza_lib import eliza
 
 def page_content(name, limit = 1000):
