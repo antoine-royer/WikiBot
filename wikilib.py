@@ -40,7 +40,7 @@ def list_pages(l_page, title, description, limit = 1000):
   else:
     page = page_content(l_page, limit)
     if len(page[0]) and len(page[1]):
-      pages[2].append([page[0], page[1])
+      pages[2].append([page[0], page[1]])
 
   return pages
 
