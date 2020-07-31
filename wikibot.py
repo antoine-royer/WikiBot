@@ -47,7 +47,7 @@ async def on_message(message):
     rep = wl.eliza_call(msg_content[0][2:])
 
   elif msg_content[0] == "help":
-    rep = discord.Embed(title="Help heading", description="List of available commands", color=randint(0, 16777215))
+    rep = discord.Embed(title="Help heading", description="List of available commands", color=wl.randint(0, 16777215))
     rep.add_field(name="Random selection of articles", value="`/r < nb > [# < language >]`", inline=False)
     rep.add_field(name="Get an article", value="`/a < title > [# < language >]`", inline=False)
     rep.add_field(name="Translate a text", value="`/t < text > [# < language >]`", inline=False)
