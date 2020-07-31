@@ -16,8 +16,8 @@ client = discord.Client()
 token = os.environ["token"]
 
 
-def make_embed(title, description, field, color = randint(0, 16777215), image = None, in_line = False):
- 
+def make_embed(title, description, field, color, image, in_line = False):
+  if not color: color = randint(0, 16777215)
   answer = discord.Embed(title=title, description=description, color=color)
 
   for i in field:
@@ -53,7 +53,7 @@ async def on_message(message):
     rep = make_embed(*wl.page_search(msg_content[0][2:]))
 
   elif not msg_content[0].find("t "):
-    rep = make_embed(wl.translation(msg_content[0][2:], language), True)
+    rep = make_embed(*wl.translation(msg_content[0][2:], language), True)
 
   elif not msg_content[0].find("e "):
     rep = wl.eliza_call(msg_content[0][2:])
