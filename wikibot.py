@@ -10,10 +10,22 @@
 import discord
 import os
 import wikilib as wl
+from random import randint
 
 client = discord.Client()
 token = os.environ["token"]
 
+
+def make_embed(title, description, field, color = randint(0, 16777215), image = None, in_line = False):
+ 
+  answer = discord.Embed(title=title, description=description, color=color)
+
+  for i in field:
+    answer.add_field(name=i[0], value=i[1], inline=in_line)
+    
+  if image:
+    answer.set_image(url=image)
+  return answer
 
 @client.event
 async def on_message(message):
@@ -32,22 +44,22 @@ async def on_message(message):
   wl.wikipedia.set_lang(language)
 
   if not msg_content[0].find("r "):
-    rep = wl.page_random(msg_content[0][2:])
+    rep = make_embed(*wl.page_random(msg_content[0][2:]))
     
   elif not msg_content[0].find("a "):
-    rep = wl.page_read(msg_content[0][2:])
+    rep = make_embed(*wl.page_read(msg_content[0][2:]))
 
   elif not msg_content[0].find("s "):
-    rep = wl.page_search(msg_content[0][2:])
+    rep = make_embed(*wl.page_search(msg_content[0][2:]))
 
   elif not msg_content[0].find("t "):
-    rep = wl.translation(msg_content[0][2:], language)
+    rep = make_embed(wl.translation(msg_content[0][2:], language), True)
 
   elif not msg_content[0].find("e "):
     rep = wl.eliza_call(msg_content[0][2:])
 
   elif msg_content[0] == "help":
-    rep = discord.Embed(title="Help heading", description="List of available commands", color=wl.randint(0, 16777215))
+    rep = discord.Embed(title="Help heading", description="List of available commands", color=randint(0, 16777215))
     rep.add_field(name="Random selection of articles", value="`/r < nb > [# < language >]`", inline=False)
     rep.add_field(name="Get an article", value="`/a < title > [# < language >]`", inline=False)
     rep.add_field(name="Translate a text", value="`/t < text > [# < language >]`", inline=False)
