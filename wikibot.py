@@ -15,14 +15,13 @@ client = discord.Client()
 token = os.environ["token"]
 
 
-
 @client.event
 async def on_message(message):
   msg_content, rep = message.content, None
   
   if message.author == client.user or msg_content[0] != "/": return None
 
-  msg_content = msg_content[1:].partition("#")
+  msg_content = list(msg_content[1:].partition("#"))
 
   msg_content[0] = msg_content[0].rstrip()
 
