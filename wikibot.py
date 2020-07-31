@@ -29,25 +29,25 @@ async def on_message(message):
   
   if not language:
     language = "en"
-  wikipedia.set_lang(language)
+  wl.wikipedia.set_lang(language)
 
   if not msg_content[0].find("r "):
-    rep = page_random(msg_content[0][2:])
+    rep = wl.page_random(msg_content[0][2:])
     
   elif not msg_content[0].find("a "):
-    rep = page_read(msg_content[0][2:])
+    rep = wl.page_read(msg_content[0][2:])
 
   elif not msg_content[0].find("s "):
-    rep = page_search(msg_content[0][2:])
+    rep = wl.page_search(msg_content[0][2:])
 
   elif not msg_content[0].find("t "):
-    rep = translation(msg_content[0][2:], language)
+    rep = wl.translation(msg_content[0][2:], language)
 
   elif not msg_content[0].find("e "):
-    rep = eliza_call(msg_content[0][2:])
+    rep = wl.eliza_call(msg_content[0][2:])
 
   elif msg_content[0] == "help":
-    rep =discord.Embed(title="Help heading", description="List of available commands", color=randint(0, 16777215))
+    rep = discord.Embed(title="Help heading", description="List of available commands", color=randint(0, 16777215))
     rep.add_field(name="Random selection of articles", value="`/r < nb > [# < language >]`", inline=False)
     rep.add_field(name="Get an article", value="`/a < title > [# < language >]`", inline=False)
     rep.add_field(name="Translate a text", value="`/t < text > [# < language >]`", inline=False)
