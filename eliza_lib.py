@@ -262,7 +262,7 @@ available_answer = [
     
     [r"(.*)\?",
      ["Why do you ask that ?",
-      "Please consider whether you can answer your own question.",
+      "Maybe you can answer your own question.",
       "Perhaps the answer lies within yourself ?",
       "Why don't you tell me ?",
       "What does this question mean to you ?",
