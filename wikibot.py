@@ -1,3 +1,12 @@
+# --------------------------------------------------
+# WikiBot (Version 1.2)
+# by Sha-Chan~
+# last version released on the 31 of July 2020
+#
+# code provided with licence :
+# GNU General Public Licence v3.0
+# --------------------------------------------------
+
 import discord
 import os
 import wikilib as wl
@@ -18,12 +27,12 @@ async def on_message(message):
   msg_content[0] = msg_content[0].rstrip()
 
   language = msg_content[2].replace(" ", "")
+  
   if not language:
     language = "en"
   wikipedia.set_lang(language)
 
-
-  elif not msg_content[0].find("r "):
+  if not msg_content[0].find("r "):
     rep = page_random(msg_content[0][2:])
     
   elif not msg_content[0].find("a "):
