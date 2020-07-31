@@ -8,7 +8,7 @@ def page_content(name, limit = 1000):
   def image_detect(img):
     for i in img:
       if ".jpg" in i.lower(): return i 
-    return ""
+    return None
   
   try:
     
@@ -35,7 +35,7 @@ def list_pages(l_page, title, description, limit = 1000):
   if type(l_page) == list:
     for page in [page_content(i, limit) for i in l_page]:
       if len(page[0]) and len(page[1]):
-        pages[2].append([page[0], page[1])
+        pages[2].append([page[0], page[1]])
 
   else:
     page = page_content(l_page, limit)
@@ -72,10 +72,9 @@ def page_read(name):
   w_title, w_content, w_url, w_img, success = page_content(name)
 
   if success:
-    page = [w_title, "Wikipedia page", [], None, None]
+    page = [w_title, "Wikipedia page", [], None, w_img]
     page[2].append(["Summary", w_content])
     page[2].append(["Page's link", w_url])
-    if len(w_img): page[4] = w_img
 
   else:
     page = [w_title, "Wikipedia page", [], 0xff0000, None]
