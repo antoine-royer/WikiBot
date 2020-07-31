@@ -1,3 +1,4 @@
+import discord
 import wikipedia
 from googletrans import Translator
 from urllib.parse import quote_plus
