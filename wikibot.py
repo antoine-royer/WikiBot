@@ -1,5 +1,5 @@
 # --------------------------------------------------
-# WikiBot (Version 1.2)
+# WikiBot (Version 1.3 bêta)
 # by Sha-Chan~
 # last version released on the 31 of July 2020
 #
@@ -58,6 +58,13 @@ async def on_message(message):
   elif not msg_content[0].find("e "):
     rep = wl.eliza_call(msg_content[0][2:])
 
+  elif not msg_content[0].find("n "):
+    name, news = wl.get_news(msg_content[0][2:])
+    embed_title = f"**{name}**"
+    rep = []
+    for article in news:
+      rep.append(make_embed(embed_title, article[0], (("Summary", article[1]), ("Link", article[2])), None, article[3]))
+    
   elif msg_content[0] == "help":
     rep = discord.Embed(title="Help heading", description="List of available commands", color=randint(0, 16777215))
     rep.add_field(name="Random selection of articles", value="`/r < nb > [# < language >]`", inline=False)
@@ -70,6 +77,8 @@ async def on_message(message):
   
   if type(rep) == str:
     await message.channel.send(rep)
+  elif type(rep) == list:
+    for msg in rep: await message.channel.send(embed = msg)
   else:
     await message.channel.send(embed = rep)
 

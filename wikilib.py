@@ -1,6 +1,8 @@
 import wikipedia
 from googletrans import Translator
 from eliza_lib import eliza
+from newspaper import get_rss
+
 
 def page_content(name, limit = 1000):
   
@@ -94,3 +96,9 @@ def eliza_call(message):
     return "I'm sorry, I only speak english…"
   return eliza(message)
 
+def get_news(parameters):
+  newspaper_name, sep, number = parameters.partition(",")
+  number = number.replace(" ", "")
+  if not number: number = 1
+  
+  return newspaper_name, get_rss(newspaper_name, number)
