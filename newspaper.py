@@ -20,13 +20,15 @@ def get_rss(newspaper_name, nb):
   data = xmltodict.parse(requests.get(url).content)
 
   # --- TEST --- #
-  if name == "ouest-france": print(data.keys())
+  if name == "ouest-france": print(data["html"].keys())
   # --- FIN --- #
   
   if name == "the lancet":
     data = data["rdf:RDF"]
-  else: 
+  elif name in ("le monde", "l'express"): 
     data = data["rss"]["channel"]
+  elif name == "ouest-france":
+    data = data["html"]
 
   
   data = data["item"][0:nb]
