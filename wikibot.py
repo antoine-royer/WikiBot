@@ -1,7 +1,7 @@
 # --------------------------------------------------
-# WikiBot (Version 1.3 bêta)
+# WikiBot (Version 1.4)
 # by Sha-Chan~
-# last version released on the 31 of July 2020
+# last version released on the 22 of August 2020
 #
 # code provided with licence :
 # GNU General Public Licence v3.0
@@ -67,7 +67,7 @@ async def on_message(message):
       for article in news:
         rep.append(make_embed(embed_title, article[0], (("Summary", article[1]), ("Link", article[2])), None, article[3]))
     else:
-      rep = make_embed(embed_title, "Unknown newspaper", ("Error", "The newspaper requested isn't registrated\n - " + " - ".join(news[1])), 16711680, None)
+      rep = make_embed(embed_title, "Unknown newspaper", (("Error", "The newspaper requested isn't registrated"), ("Newspapers available", " - " + " - ".join(news[1]))), 16711680, None)
     
   elif msg_content[0] == "help":
     rep = discord.Embed(title="Help heading", description="List of available commands", color=randint(0, 16777215))
