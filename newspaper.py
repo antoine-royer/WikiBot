@@ -7,7 +7,7 @@ def get_rss(newspaper_name, nb):
     rss = {
       "the lancet": "http://www.thelancet.com/rssfeed/lancet_current.xml",
       "le monde": "https://www.lemonde.fr/rss/une.xml",
-      "ouest france": "https://www.ouest-france.fr/rss-en-continu.xml",
+      "ouest-france": "https://www.ouest-france.fr/rss-en-continu.xml",
       "l'express": "https://www.lexpress.fr/rss/alaune.xml"}
     for name in rss:
       if name == newspaper_name: return name, rss[name]
@@ -33,7 +33,7 @@ def get_rss(newspaper_name, nb):
     
     if name == "le monde":
       information[index].append(news["media:content"]["@url"])
-    elif name in ("ouest france", "l'express"):
+    elif name in ("ouest-france", "l'express"):
       information[index].append(news["enclosure"]["@url"])
     else:
       information[index].append(None)
