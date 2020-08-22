@@ -61,12 +61,13 @@ async def on_message(message):
   elif not msg_content[0].find("n "):
     name, news = wl.get_news(msg_content[0][2:], language)
     embed_title = f"**{name}**"
-    if news:
+    if news[0]:
+      news = news[0]
       rep = []
       for article in news:
         rep.append(make_embed(embed_title, article[0], (("Summary", article[1]), ("Link", article[2])), None, article[3]))
     else:
-      rep = make_embed(embed_title, "Error", ("Unknown newspaper", "The newspaper requested isn't registrated"), 16711680)
+      rep = make_embed(embed_title, "Unknown newspaper", ("Error", "The newspaper requested isn't registrated\n - " + " - ".join(news[1])), 16711680, None)
     
   elif msg_content[0] == "help":
     rep = discord.Embed(title="Help heading", description="List of available commands", color=randint(0, 16777215))
