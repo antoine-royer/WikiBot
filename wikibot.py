@@ -59,7 +59,7 @@ async def on_message(message):
     rep = wl.eliza_call(msg_content[0][2:])
 
   elif not msg_content[0].find("n "):
-    name, news = wl.get_news(msg_content[0][2:])
+    name, news = wl.get_news(msg_content[0][2:], language)
     embed_title = f"**{name}**"
     if news:
       rep = []
@@ -74,7 +74,7 @@ async def on_message(message):
     rep.add_field(name="Get an article", value="`/a < title > [# < language >]`", inline=False)
     rep.add_field(name="Translate a text", value="`/t < text > [# < language >]`", inline=False)
     rep.add_field(name="Make a research on wikipedia", value="`/s < search_terms > [# < language >]`", inline=False)
-    rep.add_field(name="Get some news", value="`/n < newspaper_name > [, < number_of_article >]`", inline=False)
+    rep.add_field(name="Get some news", value="`/n < newspaper_name > [# < number_of_article >]`", inline=False)
     rep.add_field(name="Talk with Eliza", value="`/e < message >`", inline=False)
     
 

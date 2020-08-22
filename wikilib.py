@@ -96,9 +96,10 @@ def eliza_call(message):
     return "I'm sorry, I only speak english…"
   return eliza(message)
 
-def get_news(parameters):
-  newspaper_name, sep, number = parameters.partition(",")
-  number = number.replace(" ", "")
-  if not number: number = 1
+def get_news(newspaper_name, number):
+  try:
+    number = int(number)
+  except:
+    number = 1
   
-  return newspaper_name, get_rss(newspaper_name, int(number))
+  return newspaper_name, get_rss(newspaper_name.title(), number)

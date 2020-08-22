@@ -11,13 +11,17 @@ def get_rss(newspaper_name, nb):
       "l'express": "https://www.lexpress.fr/rss/alaune.xml"}
     for name in rss:
       if name == newspaper_name: return name, rss[name]
-    return None
+    return name, None
 
 
   name, url = url_auto(newspaper_name.lower())
   if not url: return None
   
   data = xmltodict.parse(requests.get(url).content)
+
+  # --- TEST --- #
+  if name == "ouest-france": print(data.keys())
+  # --- FIN --- #
   
   if name == "the lancet":
     data = data["rdf:RDF"]
