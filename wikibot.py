@@ -71,7 +71,7 @@ async def on_message(message):
     rep.add_field(name="Get an article", value="`/a < title > [# < language >]`", inline=False)
     rep.add_field(name="Translate a text", value="`/t < text > [# < language >]`", inline=False)
     rep.add_field(name="Make a research on wikipedia", value="`/s < search_terms > [# < language >]`", inline=False)
-    rep.add_field(name="Get some news", value="`/n < newspaper_name > [, < number_of_article >]`", inline=False
+    rep.add_field(name="Get some news", value="`/n < newspaper_name > [, < number_of_article >]`", inline=False)
     rep.add_field(name="Talk with Eliza", value="`/e < message >`", inline=False)
 
   if not rep: return None
