@@ -20,7 +20,8 @@ def get_rss(newspaper_name, nb):
   data = xmltodict.parse(requests.get(url).content)
 
   # --- TEST --- #
-  if name == "ouest-france": print(data["html"].keys())
+  if name == "ouest-france": print(data["html"]["body"].keys())
+  return None
   # --- FIN --- #
   
   if name == "the lancet":
