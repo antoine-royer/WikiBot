@@ -101,4 +101,4 @@ def get_news(parameters):
   number = number.replace(" ", "")
   if not number: number = 1
   
-  return newspaper_name, get_rss(newspaper_name, number)
+  return newspaper_name, get_rss(newspaper_name, int(number))

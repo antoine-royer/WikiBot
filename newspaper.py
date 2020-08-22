@@ -19,7 +19,7 @@ def get_rss(newspaper_name, nb):
   
   data = xmltodict.parse(requests.get(url).content)
   
-  if name == "lancet":
+  if name == "the lancet":
     data = data["rdf:RDF"]
   else: 
     data = data["rss"]["channel"]
@@ -47,5 +47,5 @@ def get_rss(newspaper_name, nb):
 # - Image
 # ---
     
-  
+
 
