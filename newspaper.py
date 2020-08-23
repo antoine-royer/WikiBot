@@ -8,10 +8,18 @@ def get_rss(newspaper_name, nb):
       "the lancet": "http://www.thelancet.com/rssfeed/lancet_current.xml",
       "le monde": "https://www.lemonde.fr/rss/une.xml",
       "l'express": "https://www.lexpress.fr/rss/alaune.xml",
-      "le figaro": "https://www.lefigaro.fr/rss/figaro_actualites.xml"}
+      "le figaro": "https://www.lefigaro.fr/rss/figaro_actualites.xml",
+      "l'obs": "https://www.nouvelobs.com/a-la-une/rss.xml"}
     for name in rss:
       if name == newspaper_name: return name, rss[name], None
     return name, None, list(rss.keys())
+
+  def special_char(text):
+    char = {"&quot;": "\"",
+            "&#039;": "'",
+            "&nbsp;": "*"}
+    for i in char: text = text.replace(i, char[i])
+    return text
 
 
   name, url, np_available = url_auto(newspaper_name.lower())
@@ -22,7 +30,7 @@ def get_rss(newspaper_name, nb):
   
   if name == "the lancet":
     data = data["rdf:RDF"]
-  elif name in ("le monde", "l'express", "le figaro"): 
+  elif name in ("le monde", "l'express", "le figaro", "l'obs"): 
     data = data["rss"]["channel"]
 
   
@@ -30,11 +38,18 @@ def get_rss(newspaper_name, nb):
 
   information = []
   for index, news in enumerate(data):
-    information.append([news["title"], news["description"], news["link"]])
+    if name == "l'express":
+      title = f"[{news['subhead']}] {news['title']}"
+    elif name in ("le figaro", "l'obs"):
+      title = f"[{news['category']}] {news['title']}"
+    else:
+      title = news["title"]
+    
+    information.append([title, special_char(news["description"]), news["link"]])
     
     if name == "le monde":
       information[index].append(news["media:content"]["@url"])
-    elif name == "l'express":
+    elif name in ("l'express", "l'obs"):
       information[index].append(news["enclosure"]["@url"])
     else:
       information[index].append(None)
@@ -42,10 +57,10 @@ def get_rss(newspaper_name, nb):
   return information, None
 
 # --- Information
-# - Titre
-# - Description
-# - Lien
-# - Image
+# 0 Titre
+# 1 Description
+# 2 Lien
+# 3 Image
 # ---
     
 
