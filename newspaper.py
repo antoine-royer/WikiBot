@@ -9,7 +9,10 @@ def get_rss(newspaper_name, nb):
       "le monde": "https://www.lemonde.fr/rss/une.xml",
       "l'express": "https://www.lexpress.fr/rss/alaune.xml",
       "le figaro": "https://www.lefigaro.fr/rss/figaro_actualites.xml",
-      "l'obs": "https://www.nouvelobs.com/a-la-une/rss.xml"}
+      "l'obs": "https://www.nouvelobs.com/a-la-une/rss.xml",
+      "time": "https://time.com/rss",
+      "the new york times": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"}
+    
     for name in rss:
       if name == newspaper_name: return name, rss[name], None
     return name, None, list(rss.keys())
@@ -17,7 +20,7 @@ def get_rss(newspaper_name, nb):
   def special_char(text):
     char = {"&quot;": "\"",
             "&#039;": "'",
-            "&nbsp;": "*"}
+            "&nbsp;": ""}
     for i in char: text = text.replace(i, char[i])
     return text
 
@@ -27,10 +30,12 @@ def get_rss(newspaper_name, nb):
   
   data = xmltodict.parse(requests.get(url).content)
 
+  # --- Get the list of articles
   
   if name == "the lancet":
     data = data["rdf:RDF"]
-  elif name in ("le monde", "l'express", "le figaro", "l'obs"): 
+    
+  elif name in ("le monde", "l'express", "le figaro", "l'obs", "time", "the new york times): 
     data = data["rss"]["channel"]
 
   
@@ -38,19 +43,28 @@ def get_rss(newspaper_name, nb):
 
   information = []
   for index, news in enumerate(data):
+    
+    # --- Title generation
+    
     if name == "l'express":
       title = f"[{news['subhead']}] {news['title']}"
-    elif name in ("le figaro", "l'obs"):
+      
+    elif name in ("le figaro", "l'obs", "time", "the new york times"):
       title = f"[{news['category']}] {news['title']}"
+      
     else:
       title = news["title"]
     
     information.append([title, special_char(news["description"]), news["link"]])
+
+    # --- Get the article's image
     
-    if name == "le monde":
+    if name in ("le monde", "the new york times":
       information[index].append(news["media:content"]["@url"])
+      
     elif name in ("l'express", "l'obs"):
       information[index].append(news["enclosure"]["@url"])
+      
     else:
       information[index].append(None)
 
