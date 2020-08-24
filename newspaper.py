@@ -59,7 +59,7 @@ def get_rss(newspaper_name, nb):
 
     # --- Get the article's image
     
-    if name in ("le monde", "the new york times":
+    if name in ("le monde", "the new york times"):
       information[index].append(news["media:content"]["@url"])
       
     elif name in ("l'express", "l'obs"):
