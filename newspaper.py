@@ -49,7 +49,7 @@ def get_rss(newspaper_name, nb):
     if name == "l'express":
       title = f"[{news['subhead']}] {news['title']}"
       
-    elif name in ("le figaro", "l'obs", "time", "the new york times"):
+    elif name in ("le figaro", "l'obs"):
       title = f"[{news['category']}] {news['title']}"
       
     else:
