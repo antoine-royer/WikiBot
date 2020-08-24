@@ -35,7 +35,7 @@ def get_rss(newspaper_name, nb):
   if name == "the lancet":
     data = data["rdf:RDF"]
     
-  elif name in ("le monde", "l'express", "le figaro", "l'obs", "time", "the new york times): 
+  elif name in ("le monde", "l'express", "le figaro", "l'obs", "time", "the new york times"): 
     data = data["rss"]["channel"]
 
   
