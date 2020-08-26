@@ -1,4 +1,4 @@
-# WikiBot (Version 1.4.1)
+# WikiBot (Version 1.5.4)
 
 ## General
 
@@ -6,7 +6,7 @@
 
 WikiBot is a discord bot who can do several things like make a wikipedia research, translate a text or discuss with you.
 
-The last version was released on the 23 of August 2020.
+The last version was released on the 26 of August 2020.
 
 ### License
 
@@ -38,6 +38,14 @@ This code was provided with license GNU General Public License v3.0.
 ### Get the last news
 
 `/n the_newspaper's_name [# number_of_newspaper_articles]`
+
+### Get the weather
+
+`/w the_city_name [# day_of_the_forecast]`
+The day parameter allow to see the forecast for :
+0 : today
+1 : tomorrow
+… etc
 
 ## language parameter
 
@@ -74,3 +82,8 @@ ELIZA only understand english.
 
 `/n The Lancet # 2`
 Returns the two last articles of The Lancet.
+
+### The weather
+
+`/w Paris # 1`
+Returns the weather for Paris tomorrow (only available with french cities)
