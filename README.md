@@ -1,4 +1,4 @@
-# WikiBot (Version 1.5.4)
+# WikiBot (Version 1.6)
 
 ## General
 
@@ -41,11 +41,12 @@ This code was provided with license GNU General Public License v3.0.
 
 ### Get the weather
 
+The weather forecasts are provided by the OpenWeather's API.
+
 `/w the_city_name [# day_of_the_forecast]`
-The day parameter allow to see the forecast for :
-0 : today
-1 : tomorrow
-… etc
+
+The day parameter allow you to see the day. 0 is today, 1 tomorrow… The maximum is 7.
+
 
 ## language parameter
 
@@ -86,4 +87,4 @@ Returns the two last articles of The Lancet.
 ### The weather
 
 `/w Paris # 1`
-Returns the weather for Paris tomorrow (only available with french cities)
+Returns the weather for Paris tomorrow.

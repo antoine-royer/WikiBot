@@ -1,5 +1,5 @@
 # --------------------------------------------------
-# WikiBot (Version 1.5.5)
+# WikiBot (Version 1.6)
 # by Sha-chan~
 # last version released on the 26 of August 2020
 #
@@ -64,9 +64,9 @@ async def on_message(message):
     if not rep:
       rep = make_embed("Wheather", "Unknown city's name", [("Error", f"No city were found for the name : '{city_name}'. Please check the city's name.")], 16711680, None)
     else:
-      rep = make_embed("Weather", f"{city_name}", rep, None, img, True)
+      rep = make_embed("Weather", f"{city_name} in {language} days", rep, None, img, True)
 
-      rep.set_footer(text = "Weather forecaste provided by OpenWeather", icon_url = "https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png")
+      rep.set_footer(text = "Weather forecast provided by OpenWeather", icon_url = "https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png")
 
   elif not msg_content[0].find("n "):
     name, news = wl.get_news(msg_content[0][2:], language)
