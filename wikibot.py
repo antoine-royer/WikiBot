@@ -62,7 +62,7 @@ async def on_message(message):
     city_name = msg_content[0][2:]
     rep = wl.weather(city_name, language)
     if not rep:
-      rep = make_embed("Wheather", "Unknown city's name", [("Error", "No city were found for the name : '{city_name}'. Please check the city's name.")], 16711680, None)
+      rep = make_embed("Wheather", "Unknown city's name", [("Error", f"No city were found for the name : '{city_name}'. Please check the city's name.")], 16711680, None)
     else:
       rep = make_embed("Weather", f"{city_name} on {rep[0][:10]}",
                        [("Wind speed", f"{rep[1]} km/h"),
