@@ -2,7 +2,6 @@ import requests
 import os
 
 def get_weather(city_name, day):
-  if day < 0 or day > 7: day = 0
   api_key = os.environ["weather_token"]
   weather_data = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={api_key}").json()
 

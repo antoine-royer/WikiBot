@@ -63,7 +63,7 @@ async def on_message(message):
     rep, img, day = wl.weather(city_name, language)
     
     if not rep:
-      rep = make_embed("Wheather", "Unknown city's name", [("Error", f"No city were found for the name : '{city_name}'. Please check the city's name.")], 16711680, None)
+      rep = make_embed("Weather", "Unknown city's name", [("Error", f"No city were found for the name : '{city_name}'. Please check the city's name.")], 16711680, None)
     else:
       if not day: day = "today"
       else: day = f"in {day} days"

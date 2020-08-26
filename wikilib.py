@@ -107,6 +107,7 @@ def get_news(newspaper_name, number):
 def weather(city_name, nb_day):
   try:
     nb_day = int(nb_day)
+    if nb_day < 0 or nb_day > 7: nb_day = 0
   except:
     nb_day = 0
 
