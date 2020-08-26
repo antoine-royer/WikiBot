@@ -8,6 +8,7 @@
 # --------------------------------------------------
 
 import discord
+import os
 import wikilib as wl
 from random import randint
 

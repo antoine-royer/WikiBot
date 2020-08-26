@@ -1,5 +1,5 @@
 import wikipedia
-from newspaper import *
+from newspaper import get_news, get_weather
 from googletrans import Translator
 from eliza_lib import eliza
 
