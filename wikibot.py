@@ -64,7 +64,9 @@ async def on_message(message):
     if not rep:
       rep = make_embed("Wheather", "Unknown city's name", [("Error", f"No city were found for the name : '{city_name}'. Please check the city's name.")], 16711680, None)
     else:
-      rep = make_embed("Weather", f"{city_name} in {language} days", rep, None, img, True)
+      if language == "en": language = "today"
+      else: language = f"in {language} days"
+      rep = make_embed("Weather", f"{city_name} {language}", rep, None, img, True)
 
       rep.set_footer(text = "Weather forecast provided by OpenWeather", icon_url = "https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png")
 
