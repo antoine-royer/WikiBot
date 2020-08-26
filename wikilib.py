@@ -1,5 +1,5 @@
 import wikipedia
-from newspaper import get_news, get_weather
+from newspaper import get_rss, get_weather
 from googletrans import Translator
 from eliza_lib import eliza
 
@@ -112,6 +112,6 @@ def weather(city_name, nb_day):
 
   try:
     weather_data = get_weather(city_name, nb_day)
-    return [(value, weather_data[index]) for index, value in enumerate(("Description", "Temperature", "Feels like", "Dew point", "Pressure", "Humidity", "Wind speed", "Wind direction", "Cloudiness", "Rain probability"))], weather_data[-1]
+    return [(value.partition("#")[0], f'{weather_data[index]}{value.partition("#")[2]}') for index, value in enumerate(("Description", "Temperature#°C", "Feels like#°C", "Dew point#°C", "Pressure# hPa", "Humidity# %", "Wind speed# km/h", "Wind direction#°", "Cloudiness# %", "Rain probability# %"))], weather_data[-1]
   except:
     return None
