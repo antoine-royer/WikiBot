@@ -59,7 +59,8 @@ async def on_message(message):
     rep = wl.eliza_call(msg_content[0][2:])
 
   elif not msg_content[0].find("w "):
-    rep = wl.weather(msg_content[0][2:], language)
+    city_name = msg_content[0][2:]
+    rep = wl.weather(city_name, language)
     if not rep:
       rep = make_embed("Wheather", "Unknown city's name", ("Error", "No city were found for the name : '{city_name}'. Please check the city's name."), 16711680, None)
     else:
