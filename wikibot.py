@@ -73,8 +73,7 @@ async def on_message(message):
                        ("Temperature max", f"{rep[6]}°C"),
                        ("Frost probability", f"{rep[7]}%"),
                        ("Fog probability", f"{rep[8]}%")], None, None)
-      rep.set_footer("Weather provided by Météo Concept", "https://api.meteo-concept.com/build/images/logo-mc.83b5ab72.jpg")
-
+      
   elif not msg_content[0].find("n "):
     name, news = wl.get_news(msg_content[0][2:], language)
     embed_title = f"**{name}**"
