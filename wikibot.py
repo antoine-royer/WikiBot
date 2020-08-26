@@ -65,14 +65,14 @@ async def on_message(message):
       rep = make_embed("Wheather", "Unknown city's name", ("Error", "No city were found for the name : '{city_name}'. Please check the city's name."), 16711680, None)
     else:
       rep = make_embed("Weather", f"{city_name} on {rep[0][:10]}",
-                       ("Wind speed", f"{rep[1]} km/h"),
+                       [("Wind speed", f"{rep[1]} km/h"),
                        ("Gust speed", f"{rep[2]} km/h"),
                        ("Wind direction", f"{rep[3]}°"),
                        ("Rain probability", f"{rep[4]}%"),
                        ("Temperature min", f"{rep[5]}°C"),
                        ("Temperature max", f"{rep[6]}°C"),
                        ("Frost probability", f"{rep[7]}%"),
-                       ("Fog probability", f"{rep[8]}%"), None, None)
+                       ("Fog probability", f"{rep[8]}%")], None, None)
       rep.set_footer("Weather provided by Météo Concept", "https://api.meteo-concept.com/build/images/logo-mc.83b5ab72.jpg")
 
   elif not msg_content[0].find("n "):
