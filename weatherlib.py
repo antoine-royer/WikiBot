@@ -19,4 +19,5 @@ def get_weather(city_name, day):
     weather_data["wind_deg"],
     weather_data["clouds"],
     weather_data["pop"] * 100,
+    weather_data["timezone"],
     f'https://openweathermap.org/img/w/{weather_data["weather"][0]["icon"]}.png')

@@ -60,14 +60,14 @@ async def on_message(message):
 
   elif not msg_content[0].find("w "):
     city_name = msg_content[0][2:]
-    rep, img, day = wl.weather(city_name, language)
+    rep, img, day, timezone = wl.weather(city_name, language)
     
     if not rep:
       rep = make_embed("Weather", "Unknown city's name", [("Error", f"No city were found for the name : '{city_name}'. Please check the city's name.")], 16711680, None)
     else:
       if not day: day = "today"
       else: day = f"in {day} days"
-      rep = make_embed("Weather", f"{city_name} {day}", rep, None, img, True)
+      rep = make_embed("Weather", f"{city_name} {day} ({timezone})", rep, None, img, True)
 
       rep.set_footer(text = "Weather forecast provided by OpenWeather", icon_url = "https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png")
 
