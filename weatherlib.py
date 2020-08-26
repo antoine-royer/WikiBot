@@ -1,8 +1,23 @@
 import requests
+import os
 
-def get_weather(city_name, nb_day):
-  insee = requests.get(f"https://api.meteo-concept.com/api/location/cities?token=0730ffab58edd00ad6c0eb0174a05d2090a3d91f0f4da4267c7d931db892091b&search={city_name}").json()["cities"][0]["insee"]
+def get_weather(city_name, day = 0):
+  #api_key = os.environ["weather_token"]
+  api_key = "de30d216d1e369c59a6a3ec5a7a49cc8"
+  weather_data = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={api_key}").json()
 
-  weather_data = requests.get(f"https://api.meteo-concept.com/api/forecast/daily?token=0730ffab58edd00ad6c0eb0174a05d2090a3d91f0f4da4267c7d931db892091b&insee={insee}").json()["forecast"][nb_day]
-  
-  return [weather_data[i] for i in ("datetime", "wind10m", "gust10m", "dirwind10m", "probarain", "tmin", "tmax", "probafrost", "probafog")]
+  lon, lat = weather_data["coord"]["lon"], weather_data["coord"]["lat"]
+  weather_data = requests.get(f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=current,minutely,hourly&appid={api_key}").json()["daily"][day]
+
+  return (
+    weather_data["weather"][0]["description"],
+    int(weather_data["temp"]["day"] - 273.15),
+    int(weather_data["feels_like"]["day"] - 273.15),
+    int(weather_data["dew_point"] - 273.15),
+    weather_data["pressure"],
+    weather_data["humidity"],
+    int(weather_data["wind_speed"] * 3.6),
+    weather_data["wind_deg"],
+    weather_data["clouds"],
+    weather_data["pop"] * 100,
+    f'https://openweathermap.org/img/w/{weather_data["weather"][0]["icon"]}.png')

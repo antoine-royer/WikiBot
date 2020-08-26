@@ -1,6 +1,6 @@
 # --------------------------------------------------
-# WikiBot (Version 1.5.4)
-# by Sha-Chan~
+# WikiBot (Version 1.5.5)
+# by Sha-chan~
 # last version released on the 26 of August 2020
 #
 # code provided with licence :
@@ -8,7 +8,6 @@
 # --------------------------------------------------
 
 import discord
-import os
 import wikilib as wl
 from random import randint
 
@@ -60,20 +59,13 @@ async def on_message(message):
 
   elif not msg_content[0].find("w "):
     city_name = msg_content[0][2:]
-    rep = wl.weather(city_name, language)
+    rep, img = wl.weather(city_name, language)
     if not rep:
       rep = make_embed("Wheather", "Unknown city's name", [("Error", f"No city were found for the name : '{city_name}'. Please check the city's name.")], 16711680, None)
     else:
-      rep = make_embed("Weather", f"{city_name} on {rep[0][:10]}",
-                       [("Wind speed", f"{rep[1]} km/h"),
-                       ("Gust speed", f"{rep[2]} km/h"),
-                       ("Wind direction", f"{rep[3]}°"),
-                       ("Rain probability", f"{rep[4]}%"),
-                       ("Temperature min", f"{rep[5]}°C"),
-                       ("Temperature max", f"{rep[6]}°C"),
-                       ("Frost probability", f"{rep[7]}%"),
-                       ("Fog probability", f"{rep[8]}%")], None, None, True)
-      rep.set_footer(text = "Weather provided by Météo Concept")
+      rep = make_embed("Weather", f"{city_name}", rep, None, img, True)
+
+      rep.set_footer(text = "Weather forecaste provided by OpenWeather", icon_url = "https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png")
 
   elif not msg_content[0].find("n "):
     name, news = wl.get_news(msg_content[0][2:], language)

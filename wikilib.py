@@ -1,7 +1,7 @@
 import wikipedia
+from newspaper import *
 from googletrans import Translator
 from eliza_lib import eliza
-from newspaper import get_rss, get_weather
 
 
 def page_content(name, limit = 1000):
@@ -111,6 +111,7 @@ def weather(city_name, nb_day):
     nb_day = 0
 
   try:
-    return get_weather(city_name, nb_day)
+    weather_data = get_weather(city_name, nb_day)
+    return [(value, weather_data[index]) for index, value in enumerate(("Description", "Temperature", "Feels like", "Dew point", "Pressure", "Humidity", "Wind speed", "Wind direction", "Cloudiness", "Rain probability"))], weather_data[-1]
   except:
     return None
