@@ -58,7 +58,7 @@ async def on_message(message):
   elif not msg_content[0].find("e "):
     rep = wl.eliza_call(msg_content[0][2:])
 
-  elif not msg.content[0].find("w "):
+  elif not msg_content[0].find("w "):
     rep = wl.weather(msg_content[0][2:], language)
     if not rep:
       rep = make_embed("Wheather", "Unknown city's name", ("Error", "No city were found for the name : '{city_name}'. Please check the city's name."), 16711680, None)
@@ -72,6 +72,7 @@ async def on_message(message):
                        ("Temperature max", f"{rep[6]}°C"),
                        ("Frost probability", f"{rep[7]}%"),
                        ("Fog probability", f"{rep[8]}%"), None, None)
+      rep.set_footer("Weather provided by Météo Concept", "https://api.meteo-concept.com/build/images/logo-mc.83b5ab72.jpg")
 
   elif not msg_content[0].find("n "):
     name, news = wl.get_news(msg_content[0][2:], language)
