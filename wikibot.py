@@ -1,5 +1,5 @@
 # --------------------------------------------------
-# WikiBot (Version 1.5 bêta)
+# WikiBot (Version 1.5.3)
 # by Sha-Chan~
 # last version released on the 23 of August 2020
 #
@@ -73,7 +73,7 @@ async def on_message(message):
                        ("Temperature max", f"{rep[6]}°C"),
                        ("Frost probability", f"{rep[7]}%"),
                        ("Fog probability", f"{rep[8]}%")], None, None, True)
-      rep.set_footer(text = "Weather provided by Météo Concept", icon_url = "https://api.meteo-concept.com/build/images/logo-mc.83b5ab72.jpg")
+      rep.set_footer(text = "Weather provided by Météo Concept")
 
   elif not msg_content[0].find("n "):
     name, news = wl.get_news(msg_content[0][2:], language)
@@ -93,6 +93,7 @@ async def on_message(message):
     rep.add_field(name="Translate a text", value="`/t < text > [# < language >]`", inline=False)
     rep.add_field(name="Make a research on wikipedia", value="`/s < search_terms > [# < language >]`", inline=False)
     rep.add_field(name="Get some news", value="`/n < newspaper_name > [# < number_of_article >]`", inline=False)
+    rep.add_field(name="Get the weather", value="`/w < city name > [# < day_of_forecast >]` for the day : 0 is today, 1 tomorrow…"
     rep.add_field(name="Talk with Eliza", value="`/e < message >`", inline=False)
     rep.add_field(name="Complete documentation", value="https://github.com/Shadow15510/WikiBot/blob/master/README.md", inline=False)
 
