@@ -1,5 +1,5 @@
-import requests
 import xmltodict
+from weatherlib import *
 
 def get_rss(newspaper_name, nb):
   

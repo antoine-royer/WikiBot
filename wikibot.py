@@ -1,5 +1,5 @@
 # --------------------------------------------------
-# WikiBot (Version 1.4.1)
+# WikiBot (Version 1.5 bêta)
 # by Sha-Chan~
 # last version released on the 23 of August 2020
 #
@@ -57,6 +57,21 @@ async def on_message(message):
 
   elif not msg_content[0].find("e "):
     rep = wl.eliza_call(msg_content[0][2:])
+
+  elif not msg.content[0].find("w "):
+    rep = wl.weather(msg_content[0][2:], language)
+    if not rep:
+      rep = make_embed("Wheather", "Unknown city's name", ("Error", "No city were found for the name : '{city_name}'. Please check the city's name."), 16711680, None))
+    else:
+      rep = make_embed("Weather", f"{city_name} on {rep[0][:10]}",
+                       ("Wind speed", f"{rep[1]} km/h"),
+                       ("Gust speed", f"{rep[2]} km/h"),
+                       ("Wind direction", f"{rep[3]}°"),
+                       ("Rain probability", f"{rep[4]}%"),
+                       ("Temperature min", f"{rep[5]}°C"),
+                       ("Temperature max", f"{rep[6]}°C"),
+                       ("Frost probability", f"{rep[7]}%"),
+                       ("Fog probability", f"{rep[8]}%"), None, None)
 
   elif not msg_content[0].find("n "):
     name, news = wl.get_news(msg_content[0][2:], language)

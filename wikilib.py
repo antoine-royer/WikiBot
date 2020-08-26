@@ -1,7 +1,7 @@
 import wikipedia
 from googletrans import Translator
 from eliza_lib import eliza
-from newspaper import get_rss
+from newspaper import get_rss, get_weather
 
 
 def page_content(name, limit = 1000):
@@ -103,3 +103,14 @@ def get_news(newspaper_name, number):
     number = 1
   
   return newspaper_name, get_rss(newspaper_name.title(), number)
+
+def weather(city_name, nb_day):
+  try:
+    nb_day = int(nb_day)
+  except:
+    nb_day = 0
+
+  try:
+    return get_weather(city_name, nb_day)
+  except:
+    return None
