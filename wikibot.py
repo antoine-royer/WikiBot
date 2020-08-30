@@ -33,7 +33,7 @@ async def on_message(message):
   
   if message.author == client.user or msg_content[0] != "/": return None
 
-  msg_content = list(msg_content[1:].partition("#"))
+  msg_content = list(msg_content[1:].partition("&"))
 
   msg_content[0] = msg_content[0].rstrip()
 
@@ -84,12 +84,12 @@ async def on_message(message):
     
   elif msg_content[0] == "help":
     rep = discord.Embed(title="Help heading", description="List of available commands", color=randint(0, 16777215))
-    rep.add_field(name="Random selection of articles", value="`/r < nb > [# < language >]`", inline=False)
-    rep.add_field(name="Get an article", value="`/a < title > [# < language >]`", inline=False)
-    rep.add_field(name="Translate a text", value="`/t < text > [# < language >]`", inline=False)
-    rep.add_field(name="Make a research on wikipedia", value="`/s < search_terms > [# < language >]`", inline=False)
-    rep.add_field(name="Get some news", value="`/n < newspaper_name > [# < number_of_article >]`", inline=False)
-    rep.add_field(name="Get the weather", value="`/w < city name > [# < day_of_forecast >]` for the day : 0 is today, 1 tomorrow…", inline=False)
+    rep.add_field(name="Random selection of articles", value="`/r < nb > [& < language >]`", inline=False)
+    rep.add_field(name="Get an article", value="`/a < title > [& < language >]`", inline=False)
+    rep.add_field(name="Translate a text", value="`/t < text > [& < language >]`", inline=False)
+    rep.add_field(name="Make a research on wikipedia", value="`/s < search_terms > [& < language >]`", inline=False)
+    rep.add_field(name="Get some news", value="`/n < newspaper_name > [& < number_of_article >]`", inline=False)
+    rep.add_field(name="Get the weather", value="`/w < city name > [& < day_of_forecast >]` for the day : 0 is today, 1 tomorrow…", inline=False)
     rep.add_field(name="Talk with Eliza", value="`/e < message >`", inline=False)
     rep.add_field(name="Complete documentation", value="https://github.com/Shadow15510/WikiBot/blob/master/README.md", inline=False)
 
