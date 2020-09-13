@@ -11,7 +11,8 @@ def get_rss(newspaper_name, nb):
       "le figaro": "https://www.lefigaro.fr/rss/figaro_actualites.xml",
       "l'obs": "https://www.nouvelobs.com/a-la-une/rss.xml",
       "time": "https://time.com/rss",
-      "the new york times": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"}
+      "the new york times": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
+      "courrier international": "https://www.courrierinternational.com/feed/all/rss.xml"}
     
     for name in rss:
       if name == newspaper_name: return name, rss[name], None
@@ -20,8 +21,17 @@ def get_rss(newspaper_name, nb):
   def special_char(text):
     char = {"&quot;": "\"",
             "&#039;": "'",
-            "&nbsp;": ""}
+            "&nbsp;": "",
+            "\xa012\xa0": " "}
     for i in char: text = text.replace(i, char[i])
+    
+    start = text.find("<")
+    stop = text.find(">", start)
+    while start != -1:
+      text = text[:start] + text[stop + 1:]
+      start = text.find("<")
+      stop = text.find(">", start)
+    
     return text
 
 
@@ -35,7 +45,7 @@ def get_rss(newspaper_name, nb):
   if name == "the lancet":
     data = data["rdf:RDF"]
     
-  elif name in ("le monde", "l'express", "le figaro", "l'obs", "time", "the new york times"): 
+  elif name in ("le monde", "l'express", "le figaro", "l'obs", "time", "the new york times", "courrier international"): 
     data = data["rss"]["channel"]
 
   
