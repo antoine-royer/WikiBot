@@ -1,7 +1,7 @@
 # --------------------------------------------------
-# WikiBot (Version 1.6)
+# WikiBot (Version 1.6.1)
 # by Sha-chan~
-# last version released on the 26 of August 2020
+# last version released on the 31 of September 2020
 #
 # code provided with licence :
 # GNU General Public Licence v3.0
@@ -84,10 +84,10 @@ async def on_message(message):
     
   elif msg_content[0] == "help":
     rep = discord.Embed(title="Help heading", description="List of available commands", color=randint(0, 16777215))
-    rep.add_field(name="Random selection of articles", value="`/r < nb > [& < language >]`", inline=False)
-    rep.add_field(name="Get an article", value="`/a < title > [& < language >]`", inline=False)
-    rep.add_field(name="Translate a text", value="`/t < text > [& < language >]`", inline=False)
     rep.add_field(name="Make a research on wikipedia", value="`/s < search_terms > [& < language >]`", inline=False)
+    rep.add_field(name="Get an article from Wikipedia", value="`/a < title > [& < language >]`", inline=False)
+    rep.add_field(name="Random selection of articles from Wikipedia", value="`/r < nb > [& < language >]`", inline=False)
+    rep.add_field(name="Translate a text", value="`/t < text > [& < language >]`", inline=False)
     rep.add_field(name="Get some news", value="`/n < newspaper_name > [& < number_of_article >]`", inline=False)
     rep.add_field(name="Get the weather", value="`/w < city name > [& < day_of_forecast >]` for the day : 0 is today, 1 tomorrow…", inline=False)
     rep.add_field(name="Talk with Eliza", value="`/e < message >`", inline=False)

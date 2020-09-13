@@ -22,7 +22,7 @@ def get_rss(newspaper_name, nb):
     char = {"&quot;": "\"",
             "&#039;": "'",
             "&nbsp;": "",
-            "\xa012\xa0": " "}
+            "\xa0": " "}
     for i in char: text = text.replace(i, char[i])
     
     start = text.find("<")

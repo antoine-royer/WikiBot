@@ -1,4 +1,4 @@
-# WikiBot (Version 1.6)
+# WikiBot (Version 1.6.1)
 
 ## General
 
@@ -6,7 +6,7 @@
 
 WikiBot is a discord bot who can do several things like make a wikipedia research, translate a text or discuss with you.
 
-The last version was released on the 31st of August 2020.
+The last version was released on the 13rd of September 2020.
 
 ### License
 
@@ -70,7 +70,7 @@ Returns a list of wikipedia pages in english about the 'sea'.
 `/t Bonjour, je suis un bot`
 Returns the text translated in english.
 
-`/t Hi, I'm fine to meet you ! & de`
+`/t Hi, I'm fine, nice to meet you ! & de`
 Returns the text translated in german.
 
 ### ELIZA chatbot
