@@ -1,91 +1,175 @@
 import xmltodict
 from weatherlib import *
 
-def get_rss(newspaper_name, nb):
+def special_char(text):
+  char = {"&quot;": "\"",
+          "&#039;": "'",
+          "&nbsp;": "",
+          "\xa0": " "}
+  for i in char: text = text.replace(i, char[i])
   
-  def url_auto(newspaper_name):
-    rss = {
-      "the lancet": "http://www.thelancet.com/rssfeed/lancet_current.xml",
-      "le monde": "https://www.lemonde.fr/rss/une.xml",
-      "l'express": "https://www.lexpress.fr/rss/alaune.xml",
-      "le figaro": "https://www.lefigaro.fr/rss/figaro_actualites.xml",
-      "l'obs": "https://www.nouvelobs.com/a-la-une/rss.xml",
-      "time": "https://time.com/rss",
-      "the new york times": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
-      "courrier international": "https://www.courrierinternational.com/feed/all/rss.xml"}
-    
-    for name in rss:
-      if name == newspaper_name: return name, rss[name], None
-    return name, None, list(rss.keys())
-
-  def special_char(text):
-    char = {"&quot;": "\"",
-            "&#039;": "'",
-            "&nbsp;": "",
-            "\xa0": " "}
-    for i in char: text = text.replace(i, char[i])
-    
+  start = text.find("<")
+  stop = text.find(">", start)
+  while start != -1:
+    text = text[:start] + text[stop + 1:]
     start = text.find("<")
     stop = text.find(">", start)
-    while start != -1:
-      text = text[:start] + text[stop + 1:]
-      start = text.find("<")
-      stop = text.find(">", start)
+  return text
+
+class NewsPaper:
+  def __init__(self):
+    self.name = None
+    self.data = None
+    self.url = None
+
+  def __get_url(self):
+    rss = (
+      "http://www.thelancet.com/rssfeed/lancet_current.xml",
+      "https://www.lemonde.fr/rss/une.xml",
+      "https://www.lexpress.fr/rss/alaune.xml",
+      "https://www.lefigaro.fr/rss/figaro_actualites.xml",
+      "https://www.nouvelobs.com/a-la-une/rss.xml",
+      "https://time.com/rss",
+      "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
+      "https://www.courrierinternational.com/feed/all/rss.xml",
+      "http://rss.liberation.fr/rss/9/")
+
+    if self.index < len(rss):
+      return rss[self.index]
+    return None
+
+  def __name_detect(self):
+    newspapers_name = {
+      "the lancet#lancet": 0,
+      "le monde#monde": 1,
+      "l'express#express": 2,
+      "le figaro#figaro": 3,
+      "l'obs#obs#l'observateur#observateur": 4,
+      "the time#time": 5,
+      "the news york times#new york times#ny times": 6,
+      "courrier international": 7,
+      "libération#liberation#libe#libé": 8}
+    for name in newspapers_name:
+      if self.name in name.split("#"):
+        self.index = newspapers_name[name]
+        return None
+
+    return [name.split("#")[0].title() for name in newspapers_name]
     
-    return text
+  def __get_data(self):
+    return xmltodict.parse(requests.get(self.url).content)
 
-
-  name, url, np_available = url_auto(newspaper_name.lower())
-  if not url: return None, np_available
-  
-  data = xmltodict.parse(requests.get(url).content)
-
-  # --- Get the list of articles
-  
-  if name == "the lancet":
-    data = data["rdf:RDF"]
+  def get_rss(self, name, nb):
+    self.name = name.lower()
     
-  elif name in ("le monde", "l'express", "le figaro", "l'obs", "time", "the new york times", "courrier international"): 
-    data = data["rss"]["channel"]
-
-  
-  data = data["item"][0:nb]
-
-  information = []
-  for index, news in enumerate(data):
+    test_available = self.__name_detect()
+    if test_available: return None, test_available
     
-    # --- Title generation
-    
-    if name == "l'express":
-      title = f"[{news['subhead']}] {news['title']}"
-      
-    elif name in ("le figaro", "l'obs"):
-      title = f"[{news['category']}] {news['title']}"
-      
-    else:
-      title = news["title"]
-    
-    information.append([title, special_char(news["description"]), news["link"]])
+    self.url = self.__get_url()
+    self.data = self.__get_data()
 
-    # --- Get the article's image
-    
-    if name in ("le monde", "the new york times"):
-      information[index].append(news["media:content"]["@url"])
-      
-    elif name in ("l'express", "l'obs"):
-      information[index].append(news["enclosure"]["@url"])
-      
-    else:
-      information[index].append(None)
+    if self.index == 0: self.data = self.__the_lancet(nb)
+    elif self.index == 1: self.data = self.__le_monde(nb)
+    elif self.index == 2: self.data = self.__l_express(nb)
+    elif self.index == 3: self.data = self.__le_figaro(nb)
+    elif self.index == 4: self.data = self.__l_obs(nb)
+    elif self.index == 5: self.data = self.__time(nb)
+    elif self.index == 6: self.data = self.__the_new_york_times(nb)
+    elif self.index == 7: self.data = self.__courrier_international(nb)   
+    elif self.index == 8: self.data = self.__liberation(nb)
 
-  return information, None
+    return self.data, None
 
-# --- Information
-# 0 Titre
-# 1 Description
-# 2 Lien
-# 3 Image
+# --- self.data
+# 0 : Titre
+# 1 : Description
+# 2 : Lien
+# 3 : Image
 # ---
-    
+
+# --- Newspapers functions --- #
+
+  def __the_lancet(self, nb):
+    information = []
+    for news in self.data["rdf:RDF"]["item"][0:nb]:
+      information.append([special_char(news["title"]),
+                          special_char(news["description"]),
+                          news["link"],
+                          None])
+    return information
+
+  def __le_monde(self, nb):
+    information = []
+    for news in self.data["rss"]["channel"]["item"][0:nb]:
+      information.append([special_char(news["title"]),
+                          special_char(news["description"]),
+                          news["link"],
+                          news["media:content"]["@url"]])
+    return information
+
+  def __l_express(self, nb):
+    information = []
+    for news in self.data["rss"]["channel"]["item"][0:nb]:
+      information.append([f"[{news['subhead']}] {special_char(news['title'])}",
+                          special_char(news["description"]),
+                          news["link"],
+                          news["enclosure"]["@url"]])
+    return information
+
+  def __le_figaro(self, nb):
+    information = []
+    for news in self.data["rss"]["channel"]["item"][0:nb]:
+      information.append([f"[{news['category']}] {special_char(news['title'])}",
+                          special_char(news["description"]),
+                          news["link"],
+                          None])
+    return information
+
+  def __l_obs(self, nb):
+    information = []
+    for news in self.data["rss"]["channel"]["item"][0:nb]:
+      information.append([f"[{news['category']}] {special_char(news['title'])}",
+                          special_char(news["description"]),
+                          news["link"],
+                          news["enclosure"]["@url"]])
+    return information
+
+  def __time(self, nb):
+    information = []
+    for news in self.data["rss"]["channel"]["item"][0:nb]:
+      information.append([special_char(news["title"]),
+                          special_char(news["description"]),
+                          news["link"],
+                          None])
+    return information
+
+  def __the_new_york_times(self, nb):
+    information = []
+    for news in self.data["rss"]["channel"]["item"][0:nb]:
+      information.append([special_char(news["title"]),
+                          special_char(news["description"]),
+                          news["link"],
+                          news["media:content"]["@url"]])
+    return information
+
+  def __courrier_international(self, nb):
+    information = []
+    for news in self.data["rss"]["channel"]["item"][0:nb]:
+      information.append([special_char(news["title"]),
+                          special_char(news["description"]),
+                          news["link"],
+                          None])
+    return information
+
+  def __liberation(self, nb):
+    information = []
+    for news in self.data["feed"]["entry"][0:nb]:
+      information.append([f"[{news['category']['@term']}] {special_char(news['title'])}",
+                         special_char(news["summary"]["#text"]),
+                         news["link"][0]["@href"],
+                         news["link"][1]["@href"]])
+    return information
+                         
 
 
+                         

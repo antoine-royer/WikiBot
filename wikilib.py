@@ -1,5 +1,5 @@
 import wikipedia
-from newspaper import get_rss, get_weather
+from newspaper import NewsPaper, get_weather
 from googletrans import Translator
 from eliza_lib import eliza
 
@@ -97,12 +97,13 @@ def eliza_call(message):
   return eliza(message)
 
 def get_news(newspaper_name, number):
+  newspaper = NewsPaper()
   try:
     number = int(number)
   except:
     number = 1
   
-  return newspaper_name, get_rss(newspaper_name.title(), number)
+  return newspaper_name.title(), newspaper.get_rss(newspaper_name, number)
 
 def weather(city_name, nb_day):
   try:
