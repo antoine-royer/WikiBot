@@ -164,10 +164,16 @@ class NewsPaper:
   def __liberation(self, nb):
     information = []
     for news in self.data["feed"]["entry"][0:nb]:
-      information.append([f"[{news['category']['@term']}] {special_char(news['title'])}",
-                         special_char(news["summary"]["#text"]),
-                         news["link"][0]["@href"],
-                         news["link"][1]["@href"]])
+      try:
+        information.append([f"[{news['category']['@term']}] {special_char(news['title'])}",
+                           special_char(news["summary"]["#text"]),
+                           news["link"][0]["@href"],
+                           news["link"][1]["@href"]])
+      except:
+        information.append([f"[{news['category']['@term']}] {special_char(news['title'])}",
+                           "*Unavailable*",
+                           news["link"][0]["@href"],
+                           news["link"][1]["@href"]])
     return information
                          
 
