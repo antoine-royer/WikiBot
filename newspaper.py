@@ -4,7 +4,7 @@ from weatherlib import *
 def special_char(text):
   char = {"&quot;": "\"",
           "&#039;": "'",
-          "&nbsp;": "",
+          "&nbsp;": " ",
           "\xa0": " "}
   for i in char: text = text.replace(i, char[i])
   
@@ -33,28 +33,30 @@ class NewsPaper:
       "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
       "https://www.courrierinternational.com/feed/all/rss.xml",
       "http://rss.liberation.fr/rss/9/",
-      "https://www.monde-diplomatique.fr/rss")
+      "https://www.monde-diplomatique.fr/rss",
+      "https://www.theguardian.com/international/rss")
 
     if self.index < len(rss):
       return rss[self.index]
     return None
 
   def __name_detect(self):
-    newspapers_name = {
-      "the lancet#lancet": 0,
-      "le monde#monde": 1,
-      "l'express#express": 2,
-      "le figaro#figaro": 3,
-      "l'obs#obs#l'observateur#observateur": 4,
-      "the time#time": 5,
-      "the news york times#new york times#ny times": 6,
-      "courrier international": 7,
-      "libération#liberation#libe#libé": 8,
-      "le monde diplomatique#monde diplomatique": 9}
+    newspapers_name = (
+      "the lancet#lancet",
+      "le monde#monde",
+      "l'express#express",
+      "le figaro#figaro",
+      "l'obs#obs#l'observateur#observateur",
+      "the time#time",
+      "the news york times#new york times#ny times",
+      "courrier international",
+      "libération#liberation#libe#libé",
+      "le monde diplomatique#monde diplomatique",
+      "the guardian#guardian")
     
-    for name in newspapers_name:
+    for index, name in enumerate(newspapers_name):
       if self.name in name.split("#"):
-        self.index = newspapers_name[name]
+        self.index = index
         return None
 
     return [name.split("#")[0].title() for name in newspapers_name]
@@ -81,6 +83,7 @@ class NewsPaper:
     elif self.index == 7: self.data = self.__courrier_international(nb)   
     elif self.index == 8: self.data = self.__liberation(nb)
     elif self.index == 9: self.data = self.__le_monde_diplomatique(nb)
+    elif self.index == 10: self.data = self.__the_guardian(nb)
 
     return self.data, None
 
@@ -191,6 +194,15 @@ class NewsPaper:
                          summary,
                          news["link"],
                          None])
+    return information
+
+  def __the_guardian(self, nb):
+    information = []
+    for news in self.data["rss"]["channel"]["item"][0:nb]:
+      information.append([special_char(news["title"]),
+                          special_char(news["description"]),
+                          news["link"],
+                          news["media:content"][0]["@url"]])
     return information
                          
 
