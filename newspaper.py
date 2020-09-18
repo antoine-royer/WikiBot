@@ -7,7 +7,8 @@ def special_char(text):
           "&nbsp;": " ",
           "\xa0": " "}
   for i in char: text = text.replace(i, char[i])
-  
+
+  text = text.replace("><", "> <")
   start = text.find("<")
   stop = text.find(">", start)
   while start != -1:
