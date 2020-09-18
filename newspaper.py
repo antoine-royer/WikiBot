@@ -85,7 +85,7 @@ class NewsPaper:
     elif self.index == 9: self.data = self.__le_monde_diplomatique(nb)
     elif self.index == 10: self.data = self.__the_guardian(nb)
 
-    if len(self.data[1]) > 1000: self.data[1] = self.data[1][1000:] + "…"
+    if len(self.data[1]) > 1000: self.data[1] = self.data[1][:1000] + "…"
     return self.data, None
 
 # --- self.data
