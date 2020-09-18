@@ -14,7 +14,7 @@ from random import randint
 
 client = discord.Client()
 token = os.environ["token"]
-__version__ = "1.6.3"
+__version__ = "1.6.7"
 
 
 def make_embed(title, description, field, color, image, in_line = False):
