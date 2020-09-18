@@ -130,8 +130,10 @@ class NewsPaper:
   def __le_figaro(self, nb):
     information = []
     for news in self.data["rss"]["channel"]["item"][0:nb]:
+      summary = news["description"]
+      if not summary: summary = "*Unavailable*"
       information.append([f"[{news['category']}] {special_char(news['title'])}",
-                          special_char(news["description"]),
+                          special_char(summary),
                           news["link"],
                           None])
     return information
