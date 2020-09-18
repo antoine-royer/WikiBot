@@ -84,7 +84,7 @@ async def on_message(message):
       rep = make_embed(embed_title, "Unknown newspaper", (("Error", "The newspaper requested isn't registrated"), ("Newspapers available", " - ".join(news[1]))), 16711680, None)
     
   elif msg_content[0] == "help":
-    rep = discord.Embed(title=f"Help pannel (Wikibot v{__version__})", description="List of available commands", color=randint(0, 16777215))
+    rep = discord.Embed(title=f"Help pannel (WikiBot v{__version__})", description="List of available commands", color=randint(0, 16777215))
     rep.add_field(name="Make a research on wikipedia", value="`/s < search_terms > [& < language >]`", inline=False)
     rep.add_field(name="Get an article from Wikipedia", value="`/a < title > [& < language >]`", inline=False)
     rep.add_field(name="Random selection of articles from Wikipedia", value="`/r < nb > [& < language >]`", inline=False)
@@ -105,6 +105,7 @@ async def on_message(message):
 
 @client.event
 async def on_ready():
+  await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="/help"))
   print("Online.")
 
 client.run(token)
