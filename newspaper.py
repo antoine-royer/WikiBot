@@ -57,7 +57,7 @@ class NewsPaper:
       "libération#liberation#libe#libé",
       "le monde diplomatique#monde diplomatique",
       "the guardian#guardian",
-      "sciences et avenir#sciences & avenir")
+      "sciences et avenir")
     
     for index, name in enumerate(newspapers_name):
       if self.name in name.split("#"):
@@ -216,10 +216,12 @@ class NewsPaper:
   def __sciences_et_avenir(self, nb):
     information = []
     for news in self.data["rss"]["channel"]["item"][0:nb]:
-      information.append([special_char(news["title"]),
+      image = None
+      if "enclosure" in news.keys(): image = news["enclosure"]["@url"]
+      information.append([f"[{news['category']}] {special_char(news['title']}"),
                           special_char(news["description"]),
                           news["link"],
-                          news["enclosure"]["@url"]])
+                          image])
     return information
                          
 
