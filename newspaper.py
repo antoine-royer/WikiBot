@@ -218,7 +218,7 @@ class NewsPaper:
     for news in self.data["rss"]["channel"]["item"][0:nb]:
       image = None
       if "enclosure" in news.keys(): image = news["enclosure"]["@url"]
-      information.append([f"[{news['category']}] {special_char(news['title']}"),
+      information.append([f"[{news['category']}] {special_char(news['title'])}",
                           special_char(news["description"]),
                           news["link"],
                           image])
