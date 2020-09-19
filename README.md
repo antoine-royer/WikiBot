@@ -4,7 +4,7 @@
 
 ### Presentation
 
-WikiBot is a discord bot who can do several things like make a wikipedia research, translate a text or discuss with you.
+WikiBot is a discord bot which makes a wikipedia research, translates a text or discusses with you.
 
 The last version was released on the 19 of September 2020.
 
@@ -12,6 +12,9 @@ The last version was released on the 19 of September 2020.
 
 This code was provided with license GNU General Public License v3.0.
 
+### Adding WikiBot
+
+For adding WikiBot to your server, please [click here](https://discord.com/api/oauth2/authorize?client_id=731043686682591263&permissions=8&scope=bot).
 
 ## Features and command
 
