@@ -31,8 +31,9 @@ def make_embed(title, description, field, color, image, in_line = False):
 @client.event
 async def on_message(message):
   msg_content, rep = message.content, None
+  if message.author == client.user: return None
   try:
-    if message.author == client.user or msg_content[0] != "/": return None
+    if msg_content[0] != "/": return None
   except:
     return None
 
