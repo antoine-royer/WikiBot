@@ -15,6 +15,8 @@ def special_char(text):
     text = text[:start] + text[stop + 1:]
     start = text.find("<")
     stop = text.find(">", start)
+
+  if len(text) > 1000: return text[:1000] + "…"
   return text
 
 class NewsPaper:
@@ -35,7 +37,8 @@ class NewsPaper:
       "https://www.courrierinternational.com/feed/all/rss.xml",
       "http://rss.liberation.fr/rss/9/",
       "https://www.monde-diplomatique.fr/rss",
-      "https://www.theguardian.com/international/rss")
+      "https://www.theguardian.com/international/rss",
+      "https://www.sciencesetavenir.fr/rss.xml")
 
     if self.index < len(rss):
       return rss[self.index]
@@ -53,7 +56,8 @@ class NewsPaper:
       "courrier international",
       "libération#liberation#libe#libé",
       "le monde diplomatique#monde diplomatique",
-      "the guardian#guardian")
+      "the guardian#guardian",
+      "sciences et avenir#sciences & avenir")
     
     for index, name in enumerate(newspapers_name):
       if self.name in name.split("#"):
@@ -85,9 +89,7 @@ class NewsPaper:
     elif self.index == 8: self.data = self.__liberation(nb)
     elif self.index == 9: self.data = self.__le_monde_diplomatique(nb)
     elif self.index == 10: self.data = self.__the_guardian(nb)
-
-    for index in range(len(self.data)):
-      if len(self.data[index][1]) > 1000: self.data[index][1] = self.data[index][1][:1000] + "…"
+    elif self.index == 11: self.data = self.__sciences_et_avenir(nb)
 
     return self.data, None
 
@@ -209,6 +211,15 @@ class NewsPaper:
                           special_char(news["description"]),
                           news["link"],
                           news["media:content"][0]["@url"]])
+    return information
+
+  def __sciences_et_avenir(self, nb):
+    information = []
+    for news in self.data["rss"]["channel"]["item"][0:nb]:
+      information.append([special_char(news["title"]),
+                          special_char(news["description"]),
+                          news["link"],
+                          news["enclosure"]["@url"]])
     return information
                          
 
