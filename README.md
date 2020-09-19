@@ -1,4 +1,4 @@
-# WikiBot (Version 1.6.3)
+# WikiBot (Version 1.6.7)
 
 ## General
 

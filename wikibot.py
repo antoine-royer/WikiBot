@@ -1,5 +1,5 @@
 # --------------------------------------------------
-# WikiBot (Version 1.6.3)
+# WikiBot (Version 1.6.7)
 # by Sha-chan~
 # last version released on the 17 of September 2020
 #
