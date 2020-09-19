@@ -1,7 +1,7 @@
 # --------------------------------------------------
-# WikiBot (Version 1.6.7)
+# WikiBot (Version 1.6.8)
 # by Sha-chan~
-# last version released on the 17 of September 2020
+# last version released on the 19 of September 2020
 #
 # code provided with licence :
 # GNU General Public Licence v3.0
@@ -14,7 +14,7 @@ from random import randint
 
 client = discord.Client()
 token = os.environ["token"]
-__version__ = "1.6.7"
+__version__ = "1.6.8"
 
 
 def make_embed(title, description, field, color, image, in_line = False):
@@ -31,8 +31,10 @@ def make_embed(title, description, field, color, image, in_line = False):
 @client.event
 async def on_message(message):
   msg_content, rep = message.content, None
-  
-  if message.author == client.user or msg_content[0] != "/": return None
+  try:
+    if message.author == client.user or msg_content[0] != "/": return None
+  except:
+    return None
 
   msg_content = list(msg_content[1:].partition("&"))
 
