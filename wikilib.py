@@ -9,24 +9,25 @@ def page_content(name, limit = 1000):
   def image_detect(img):
     img.reverse()
     for i in img:
-      if ".jpg" in i.lower(): return i 
+      if ".jpg" in i.lower() or ".png" in i.lower(): return i 
     return None
   
   try:
     
     search = wikipedia.WikipediaPage(name)
-    if len(search.content) > limit:
-      content = search.content[:limit] + "…"
+    if len(search.summary) > limit:
+      summary = search.summary[:limit] + "…"
     else:
-      content = search.content
+      summary = search.summary
       
-    content = content.replace("()", "").replace("(listen)", "")
+    summary = summary.replace("()", "").replace("(listen)", "")
 
-    if content.find("==") + 1:
-      content = content[:content.find("==")]
+    if summary.find("==") + 1:
+      summary = summary[:summaryt.find("==")]
+      
     img = image_detect(search.images)
     
-    return search.title, content.replace(" , ", ", "), search.url, img, True
+    return search.title, summary.replace(" , ", ", "), search.url, img, True
 
   except:
     return name.capitalize(), "", "", "", False
