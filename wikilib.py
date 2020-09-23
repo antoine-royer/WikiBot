@@ -12,11 +12,11 @@ def page_content(name, limit = 1000):
       value = value.split("/commons/")
       img[index] = value[0][6:] + "/commons/thumb/" + value[1]
 
-    img = {code_html.find(i):i for i in img if i in code_html}
+    for url in img:
+      if url in code_html: return "https:" + url
 
-    if not img: return None
-    else:
-      return "https:" + img[min(img.keys())]
+    return None
+
     
   try:
     
@@ -78,8 +78,11 @@ def page_search(name):
     return rep
   
 def page_read(name):
-  name = wikipedia.search(name, results = 1)[0]
-  w_title, w_content, w_url, w_img, success = page_content(name)
+  try:
+    name = wikipedia.search(name, results = 1)[0]
+    w_title, w_content, w_url, w_img, success = page_content(name)
+  except:
+    sucess = False
 
   if success:
     page = [w_title, "Wikipedia page", [], None, w_img]
