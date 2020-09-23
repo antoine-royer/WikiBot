@@ -1,17 +1,24 @@
 import wikipedia
-from newspaper import NewsPaper, get_weather
-from googletrans import Translator
-from eliza_lib import eliza
+#from newspaper import NewsPaper, get_weather
+#from googletrans import Translator
+#from eliza_lib import eliza
 
+wikipedia.set_lang("fr")
 
 def page_content(name, limit = 1000):
   
-  def image_detect(img):
-    img.reverse()
-    for i in img:
-      if ".jpg" in i.lower() or ".png" in i.lower(): return i 
-    return None
-  
+  def image_detect(img, code_html):
+    img = [i for i in img if i.endswith(".jpg")]
+    for index, value in enumerate(img):
+      value = value.split("/commons/")
+      img[index] = value[0][6:] + "/commons/thumb/" + value[1]
+
+    img = {code_html.find(i):i for i in img if i in code_html}
+
+    if not img: return None
+    else:
+      return "https:" + img[min(img.keys())]
+    
   try:
     
     search = wikipedia.WikipediaPage(name)
@@ -23,9 +30,9 @@ def page_content(name, limit = 1000):
     summary = summary.replace("()", "").replace("(listen)", "")
 
     if summary.find("==") + 1:
-      summary = summary[:summaryt.find("==")]
+      summary = summary[:summary.find("==")]
       
-    img = image_detect(search.images)
+    img = image_detect(search.images, search.html())
     
     return search.title, summary.replace(" , ", ", "), search.url, img, True
 
