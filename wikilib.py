@@ -7,6 +7,7 @@ from eliza_lib import eliza
 def page_content(name, limit = 1000):
   
   def image_detect(img):
+    img.reverse()
     for i in img:
       if ".jpg" in i.lower(): return i 
     return None
