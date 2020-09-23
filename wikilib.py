@@ -72,6 +72,7 @@ def page_search(name):
     return rep
   
 def page_read(name):
+  name = wikipedia.search(name, results = 1)[0]
   w_title, w_content, w_url, w_img, success = page_content(name)
 
   if success:
