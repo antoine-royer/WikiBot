@@ -83,7 +83,7 @@ def page_read(name):
     name = wikipedia.search(name, results = 1)[0]
     w_title, w_content, w_url, w_img, success = page_content(name)
   except:
-    sucess = False
+    success = False
 
   if success:
     page = [w_title, "Wikipedia page", [], None, w_img]
