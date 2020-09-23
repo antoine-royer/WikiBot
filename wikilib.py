@@ -3,7 +3,6 @@ from newspaper import NewsPaper, get_weather
 from googletrans import Translator
 from eliza_lib import eliza
 
-
 def page_content(name, limit = 1000):
   
   def image_detect(img, code_html):
@@ -13,9 +12,9 @@ def page_content(name, limit = 1000):
       value = value.split("/commons/")
       img[index] = value[0][6:] + "/commons/thumb/" + value[1]
 
-    for url in img:
-      if url in code_html: return "https:" + url.replace("thumb/", "")
-
+    img = {code_html.find(url): url for url in img if url in code_html}
+    if img:
+      return "https:" + img[min(img.keys())].replace("/thumb", "")
     return None
 
     
