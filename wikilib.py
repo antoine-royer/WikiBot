@@ -1,9 +1,8 @@
 import wikipedia
-#from newspaper import NewsPaper, get_weather
-#from googletrans import Translator
-#from eliza_lib import eliza
+from newspaper import NewsPaper, get_weather
+from googletrans import Translator
+from eliza_lib import eliza
 
-wikipedia.set_lang("fr")
 
 def page_content(name, limit = 1000):
   
