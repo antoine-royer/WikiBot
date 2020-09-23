@@ -1,4 +1,4 @@
-# WikiBot (Version 1.6.8)
+# WikiBot (Version 1.7)
 
 ## General
 
@@ -6,7 +6,7 @@
 
 WikiBot is a discord bot which makes a wikipedia research, translates a text or discusses with you.
 
-The last version was released on the 19 of September 2020.
+The last version was released on the 23 of September 2020.
 
 ### License
 
@@ -81,6 +81,7 @@ Returns the text translated in german.
 ELIZA only understand english.
 
 `/e Hello`
+Is a good way to start a conversation.
 
 ### The newspaper
 
