@@ -8,16 +8,13 @@ def page_content(name, limit = 1000):
   
   def image_detect(img, code_html):
     img = [i for i in img if i.endswith(".jpg")]
-
-    print("Début du process : ")
-    for i in img: print(i)
     
     for index, value in enumerate(img):
       value = value.split("/commons/")
       img[index] = value[0][6:] + "/commons/thumb/" + value[1]
 
     for url in img:
-      if url in code_html: return "https:" + url
+      if url in code_html: return "https:" + url.replace("thumb/", "")
 
     return None
 
@@ -36,9 +33,7 @@ def page_content(name, limit = 1000):
       summary = summary[:summary.find("==")]
       
     img = image_detect(search.images, search.html())
-    
-    print(f"Fin du process : {img}")
-    
+        
     return search.title, summary.replace(" , ", ", "), search.url, img, True
 
   except:
