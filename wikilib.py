@@ -15,6 +15,7 @@ def page_content(name, limit = 1000):
   try:
     
     search = wikipedia.WikipediaPage(name)
+    
     if len(search.summary) > limit:
       summary = search.summary[:limit] + "…"
     else:
@@ -22,10 +23,8 @@ def page_content(name, limit = 1000):
       
     summary = summary.replace("()", "").replace("(listen)", "")
 
-    if summary.find("==") + 1:
-      summary = summary[:summary.find("==")]
       
-    img = image_detect(search.images, requests.get(search.url).text)
+    img = image_detect(requests.get(search.url).text)
         
     return search.title, summary.replace(" , ", ", "), search.url, img, True
 
