@@ -1,7 +1,7 @@
 # --------------------------------------------------
-# WikiBot (Version 1.7)
+# WikiBot (Version 1.7.1)
 # by Sha-chan~
-# last version released on the 23 of September 2020
+# last version released on the 24 of September 2020
 #
 # code provided with licence :
 # GNU General Public Licence v3.0
@@ -14,7 +14,7 @@ from random import randint
 
 client = discord.Client()
 token = os.environ["token"]
-__version__ = "1.7"
+__version__ = "1.7.1"
 
 
 def make_embed(title, description, field, color, image, in_line = False):
@@ -50,7 +50,10 @@ async def on_message(message):
   if not msg_content[0].find("r "):
     rep = make_embed(*wl.page_random(msg_content[0][2:]))
     
-  elif not msg_content[0].find("a "):
+  elif not msg_content[0].find("p+ "):
+    rep = make_embed(*wl.page_read(msg_content[0][2:], True))
+
+  elif not msg_content[0].find("p "):
     rep = make_embed(*wl.page_read(msg_content[0][2:]))
 
   elif not msg_content[0].find("s "):
@@ -89,7 +92,8 @@ async def on_message(message):
   elif msg_content[0] == "help":
     rep = discord.Embed(title=f"Help pannel (WikiBot v{__version__})", description="List of available commands", color=randint(0, 16777215))
     rep.add_field(name="Make a research on wikipedia", value="`/s < search_terms > [& < language >]`", inline=False)
-    rep.add_field(name="Get an article from Wikipedia", value="`/a < title > [& < language >]`", inline=False)
+    rep.add_field(name="Get an article from Wikipedia with the exact title", value="`/p < title > [& < language >]`", inline=False)
+    rep.add_field(name="Get an article with an automatic correction on the title", value="`/p+ < title > [& < language >]`", inline=False
     rep.add_field(name="Random selection of articles from Wikipedia", value="`/r < nb > [& < language >]`", inline=False)
     rep.add_field(name="Translate a text", value="`/t < text > [& < language >]`", inline=False)
     rep.add_field(name="Get some news", value="`/n < newspaper_name > [& < number_of_article >]`", inline=False)

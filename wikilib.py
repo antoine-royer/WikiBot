@@ -70,8 +70,14 @@ def page_search(name):
     rep[2].append(["Error", "There is none article corresponds to your research. Please check your search terms."])
     return rep
   
-def page_read(name):
-   
+def page_read(name, automatic_correction = False):
+  def auto_name(name):
+    try:
+      return wikipedia.search(name, results = 1)[0]
+    except:
+      return name
+
+  if automatic_correction: name = auto_name(name)
   w_title, w_content, w_url, w_img, success = page_content(name)
     
   if success:
