@@ -65,8 +65,10 @@ This argument allows you to choose the language of article on wikipedia or the d
 `/r 1 & de` 
 Returns a random article in german.
 
-`/a Paris & fr`
+`/p Paris & fr`
 Returns the Paris's wikipedia page in french.
+
+If you have a doubt on the spelling of your search, use `/p+ …`.
 
 `/s Sea`
 Returns a list of wikipedia pages in english about the 'sea'.
