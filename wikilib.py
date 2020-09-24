@@ -3,6 +3,8 @@ from newspaper import NewsPaper, get_weather
 from googletrans import Translator
 from eliza_lib import eliza
 
+import requests
+
 def page_content(name, limit = 1000):
   
   def image_detect(code_source):
