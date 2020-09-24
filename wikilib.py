@@ -9,8 +9,16 @@ def page_content(name, limit = 1000):
   
   def image_detect(code_source):
     start = code_source.find("//upload")
-    end = min(code_source.find(".png", start), code_source.find(".jpg", start))
-    return "https:" + code_source[start:end + 4]
+    end_png = code_source.find(".png", start)
+    end_jpg = code_source.find(".jpg", start)
+
+    if end_png < end_jpg and end_png != -1: end = end_png
+    else: end = end_jpg
+
+    if not code_source[start:end + 4]:
+      return None
+    else:
+      return "https:" + code_source[start:end + 4]
     
   try:
     
