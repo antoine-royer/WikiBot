@@ -25,7 +25,7 @@ def page_content(name, limit = 1000):
     if summary.find("==") + 1:
       summary = summary[:summary.find("==")]
       
-    img = image_detect(search.images, search.html())
+    img = image_detect(search.images)
         
     return search.title, summary.replace(" , ", ", "), search.url, img, True
 
