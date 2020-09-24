@@ -78,18 +78,9 @@ def page_search(name):
     return rep
   
 def page_read(name):
-  def auto_name(name):
-    try:
-      return wikipedia.search(name, results = 1)[0]
-    except:
-      return name
-    
+   
   w_title, w_content, w_url, w_img, success = page_content(name)
-  
-  if not success:
-    name = auto_name(name)
-    w_title, w_content, w_url, w_img, success = page_content(name)
-  
+    
   if success:
     page = [w_title, "Wikipedia page", [], None, w_img]
     page[2].append(["Summary", w_content])
