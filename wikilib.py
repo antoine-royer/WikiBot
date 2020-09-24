@@ -5,18 +5,12 @@ from eliza_lib import eliza
 
 def page_content(name, limit = 1000):
   
-  def image_detect(img, code_html):
+  def image_detect(img):
     img = [i for i in img if i.endswith(".jpg")]
-    
-    for index, value in enumerate(img):
-      value = value.split("/commons/")
-      img[index] = value[0][6:] + "/commons/thumb/" + value[1]
-
-    img = {code_html.find(url): url for url in img if url in code_html}
     if img:
-      return "https:" + img[min(img.keys())].replace("/thumb", "")
-    return None
-
+      return img[0]
+    else:
+      return None
     
   try:
     
