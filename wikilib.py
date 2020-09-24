@@ -5,12 +5,10 @@ from eliza_lib import eliza
 
 def page_content(name, limit = 1000):
   
-  def image_detect(img):
-    img = [i for i in img if i.endswith(".jpg")]
-    if img:
-      return img[0]
-    else:
-      return None
+  def image_detect(code_source):
+    start = code_source.find("//upload")
+    end = min(code_source.find(".png", start), code_source.find(".jpg", start))
+    return "https:" + code_source[start:end + 4]
     
   try:
     
@@ -25,7 +23,7 @@ def page_content(name, limit = 1000):
     if summary.find("==") + 1:
       summary = summary[:summary.find("==")]
       
-    img = image_detect(search.images)
+    img = image_detect(search.images, requests.get(search.url).text)
         
     return search.title, summary.replace(" , ", ", "), search.url, img, True
 
