@@ -18,6 +18,6 @@ def get_weather(city_name, day):
     int(weather_data["daily"][day]["wind_speed"] * 3.6),
     weather_data["daily"][day]["wind_deg"],
     weather_data["daily"][day]["clouds"],
-    weather_data["daily"][day]["pop"] * 100,
+    int(weather_data["daily"][day]["pop"] * 100),
     weather_data["timezone"],
     f'https://openweathermap.org/img/w/{weather_data["daily"][day]["weather"][0]["icon"]}.png')
