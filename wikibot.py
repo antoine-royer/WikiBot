@@ -1,7 +1,7 @@
 # --------------------------------------------------
-# WikiBot (Version 1.7.1)
+# WikiBot (Version 1.7.2)
 # by Sha-chan~
-# last version released on the 24 of September 2020
+# last version released on the 25 of September 2020
 #
 # code provided with licence :
 # GNU General Public Licence v3.0
@@ -14,7 +14,7 @@ from random import randint
 
 client = discord.Client()
 token = os.environ["token"]
-__version__ = "1.7.1"
+__version__ = "1.7.2"
 
 
 def make_embed(title, description, field, color, image, in_line = False):

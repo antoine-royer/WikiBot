@@ -16,8 +16,6 @@ def page_content(name, limit = 1000):
     else: end = end_jpg
 
     end += 4
-
-    print("url détectée : https:" + code_source[start:end])
       
     if not code_source[start:end]:
       return None
@@ -39,8 +37,6 @@ def page_content(name, limit = 1000):
     summary = summary.replace("()", "").replace("(listen)", "")
 
     img = image_detect(requests.get(search.url).text)
-
-    print(f"url reçue : {img}")
         
     return search.title, summary.replace(" , ", ", "), search.url, img, True
 
