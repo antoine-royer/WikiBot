@@ -15,10 +15,14 @@ def page_content(name, limit = 1000):
     if end_png < end_jpg and end_png != -1: end = end_png
     else: end = end_jpg
 
-    if not code_source[start:end + 4]:
+    end += 4
+
+    print("url détectée : https:" + code_source[start:end])
+    
+    if not code_source[start:end]:
       return None
     else:
-      return "https:" + code_source[start:end + 4]
+      return "https:" + code_source[start:end]
     
   try:
     
@@ -31,8 +35,9 @@ def page_content(name, limit = 1000):
       
     summary = summary.replace("()", "").replace("(listen)", "")
 
-      
     img = image_detect(requests.get(search.url).text)
+
+    print(f"url reçue : {img}")
         
     return search.title, summary.replace(" , ", ", "), search.url, img, True
 
