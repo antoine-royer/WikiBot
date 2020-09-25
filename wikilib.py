@@ -18,11 +18,14 @@ def page_content(name, limit = 1000):
     end += 4
 
     print("url détectée : https:" + code_source[start:end])
-    
+      
     if not code_source[start:end]:
       return None
     else:
-      return "https:" + code_source[start:end]
+      url = "https:" + code_source[start:end]
+      if "404: Not Found" in requests.get(url).text:
+        url = url.replace("/thumb", "")
+      return url
     
   try:
     
