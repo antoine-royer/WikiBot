@@ -27,8 +27,15 @@ def page_content(name, limit = 1000):
       summary = search.summary[:limit] + "…"
     else:
       summary = search.summary
-      
-    summary = summary.replace("()", "").replace("(listen)", "")
+
+    math_formula_start = summary.find("\n\n  ")
+    math_formula_end = 7 + summary.find("}\n  \n", math_formula_start)
+    if math_formula_start != -1 and math_formula_end != -1:
+      while summary[math_formula_end:][0].isspace(): math_formula_end += 1
+      summary = summary[:math_formula_start] + " [formule]\n" + summary[math_formula_end].upper() + summary[1 + math_formula_end:]
+
+    for i in ("()", "(audio)", "(listen)"):
+      summary = summary.replace(i, "")
 
     img = image_detect(requests.get(search.url).text)
         
