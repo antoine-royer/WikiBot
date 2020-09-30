@@ -22,6 +22,8 @@ def page_content(name, limit = 1000):
   try:
     
     search = wikipedia.WikipediaPage(name)
+
+    summary = search.summary
     
     math_formula_start = summary.find("\n\n  ")
     math_formula_end = 7 + summary.find("}\n  \n", math_formula_start)
@@ -32,10 +34,10 @@ def page_content(name, limit = 1000):
     for i in ("()", "(audio)", "(listen)"):
       summary = summary.replace(i, "")
 
-    if len(search.summary) > limit:
-      summary = search.summary[:limit] + "…"
+    if len(summary) > limit:
+      summary = summary[:limit] + "…"
     else:
-      summary = search.summary
+      summary = summary
 
     img = image_detect(requests.get(search.url).text)
         
