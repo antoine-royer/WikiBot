@@ -6,9 +6,9 @@ def special_char(text):
           "&#039;": "'",
           "&nbsp;": " ",
           "\xa0": " ",
-          "&#8212;", "-",
-          "&#8230;", "…",
-          "&#8217;", "'"}
+          "&#8212;": "-",
+          "&#8230;": "…",
+          "&#8217;": "'"}
   for i in char: text = text.replace(i, char[i])
 
   text = text.replace("><", "> <")
