@@ -1,11 +1,10 @@
 import wikipedia
+import requests
 from googletrans import Translator
 
-from newspaper_lib import NewsPaper
-from weather_lib import get_weather
-from eliza_lib import eliza
-
-import requests
+from libs.newspaper_lib import NewsPaper
+from libs.weather_lib import get_weather
+from libs.eliza_lib import eliza
 
 def page_content(name, limit = 1000):
   
