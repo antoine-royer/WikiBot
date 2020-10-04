@@ -9,7 +9,7 @@
 
 import discord
 import os
-import wikibot_lib as wl
+from libs import wikibot_lib as wl
 
 from random import randint
 
