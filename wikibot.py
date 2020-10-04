@@ -1,7 +1,7 @@
 # --------------------------------------------------
-# WikiBot (Version 1.7.4)
+# WikiBot (Version 1.7.5)
 # by Sha-chan~
-# last version released on the 2 of October 2020
+# last version released on the 4 of October 2020
 #
 # code provided with licence :
 # GNU General Public Licence v3.0
@@ -9,12 +9,13 @@
 
 import discord
 import os
-import wikilib as wl
+import wikibot_lib as wl
+
 from random import randint
 
 client = discord.Client()
 token = os.environ["token"]
-__version__ = "1.7.4"
+__version__ = "1.7.5"
 
 
 def make_embed(title, description, field, color, image, in_line = False):
@@ -36,6 +37,8 @@ async def on_message(message):
     if msg_content[0] != "/": return None
   except:
     return None
+
+  print(f"{message.author.name} : {message.content}")
 
   msg_content = list(msg_content[1:].partition("&"))
 
@@ -67,14 +70,14 @@ async def on_message(message):
 
   elif not msg_content[0].find("w "):
     city_name = msg_content[0][2:]
-    rep, img, day, timezone = wl.weather(city_name, language)
+    rep, img, day, timezone, datetime = wl.weather(city_name, language)
     
     if not rep:
       rep = make_embed("Weather", "Unknown city's name", [("Error", f"No city were found for the name : '{city_name}'. Please check the city's name.")], 16711680, None)
     else:
-      if day == 0: day = "today"
-      elif day == 1: day = "tomorrow"
-      else: day = f"in {day} days"
+      if day == 0: day = f"today : {datetime}"
+      elif day == 1: day = f"tomorrow : {datetime}"
+      else: day = f"in {day} days : {datetime}"
       rep = make_embed("Weather", f"{city_name} {day} ({timezone})", rep, None, img, True)
 
       rep.set_footer(text = "Weather forecast provided by OpenWeather", icon_url = "https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png")
