@@ -9,6 +9,7 @@ from libs.eliza_lib import eliza
 def math_formula_detection(text, source_code, index = 0):
     def get_start(source_code, index = 0):
         end = source_code.find('<span class="mwe-math-element">', index)
+        if end == -1: return None
         start = end
         while not source_code[start].isupper(): start -= 1
         return text_formater(source_code[start: end])
@@ -34,6 +35,7 @@ def math_formula_detection(text, source_code, index = 0):
         return text.replace("  ", " ").strip(char).rstrip(char)
 
     start = get_start(source_code, index)
+    if not start: return text
     lenght_start = len(start)    
     start = text.find(start)
     
@@ -45,7 +47,6 @@ def math_formula_detection(text, source_code, index = 0):
     if start == -1 or end == -1: return text
     else:
         return text[:start + lenght_start].rstrip("\n ") + " [ *formule* ].\n" + math_formula_detection(text[end + lenght_end:].strip("\n ."), source_code, index) 
-   
 
 def page_content(name, limit = 1000):
   
