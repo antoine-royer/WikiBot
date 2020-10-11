@@ -6,40 +6,80 @@ from libs.newspaper_lib import NewsPaper
 from libs.weather_lib import get_weather
 from libs.eliza_lib import eliza
 
+def math_formula_detection(text, source_code, index = 0):
+    def get_start(source_code, index = 0):
+        end = source_code.find('<span class="mwe-math-element">', index)
+        start = end
+        while not source_code[start].isupper(): start -= 1
+        return text_formater(source_code[start: end])
+    
+    def get_end(source_code, index = 0):
+        start = 10 + source_code.find(' alttext="', source_code.find('<span class="mwe-math-element">', index))
+        end = source_code.find('"', start)
+        return text_formater(source_code[start: end]), end
+
+    def chevrons(text):
+        if text.find(">") < text.find("<"): text = "<" + text
+        while "<" in text or ">" in text:
+            start = text.find("<")
+            end = text.find(">", start) + 1
+            text = text[:start] + " " + text[end:]
+        return text
+
+    def text_formater(text):
+        char = "\n .:!?,;0123456789&#"
+        for pattern in ("amp;", ""):
+            text = text.replace(pattern, "")
+        text = chevrons(text)
+        return text.replace("  ", " ").strip(char).rstrip(char)
+
+    start = get_start(source_code, index)
+    lenght_start = len(start)    
+    start = text.find(start)
+    
+    end, index = get_end(source_code, index)
+    lenght_end = len(end)
+    end = text.find(end)
+
+    
+    if start == -1 or end == -1: return text
+    else:
+        return text[:start + lenght_start].rstrip("\n ") + " [ *formule* ].\n" + math_formula_detection(text[end + lenght_end:].strip("\n ."), source_code, index) 
+   
+
 def page_content(name, limit = 1000):
   
-  def image_detect(code_source):
-    start = code_source.find("//upload")
-    end = [code_source.find(ext, start) for ext in (".PNG", ".png", ".JPG", ".jpg")]
+  def image_detect(source_code):
+    start = source_code.find("//upload")
+    end = [source_code.find(ext, start) for ext in (".PNG", ".png", ".JPG", ".jpg")]
     end = min([ext for ext in end if ext != -1]) + 4
      
-    if not code_source[start:end]:
+    if not source_code[start:end]:
       return None
     else:
-      url = "https:" + code_source[start:end]
+      url = "https:" + source_code[start:end]
       if not ".svg" in url: url = url.replace("/thumb", "")
-      return url
-    
+      if url not in (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disambig_colour.svg/20px-Disambig_colour.svg.png",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Arithmetic_symbols.svg/24px-Arithmetic_symbols.svg.png",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Racine_carr%C3%A9e_bleue.svg/24px-Racine_carr%C3%A9e_bleue.svg.png"
+        ):
+        return url
+  
   try:
     
     search = wikipedia.WikipediaPage(name)
-
-    summary = search.summary
+    source_code = requests.get(search.url).text
     
-    math_formula_start = summary.find("\n\n  ")
-    math_formula_end = 7 + summary.find("}\n  \n", math_formula_start)
+    summary = math_formula_detection(search.summary, source_code)   
     
-    if math_formula_start != -1 and math_formula_end != -1:      
-      while summary[math_formula_end:][0].isspace(): math_formula_end += 1
-      summary = summary[:math_formula_start] + " [ *formule* ]\n" + summary[math_formula_end].upper() + summary[1 + math_formula_end:]
-
     for i in ("()", "(audio)", "(listen)"):
       summary = summary.replace(i, "")
 
     if len(summary) > limit:
       summary = summary[:limit] + "…"
 
-    img = image_detect(requests.get(search.url).text)
+    img = image_detect(source_code)
         
     return search.title, summary.replace(" , ", ", "), search.url, img, True
 
