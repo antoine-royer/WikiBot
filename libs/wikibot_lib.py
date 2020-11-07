@@ -161,13 +161,21 @@ def eliza_call(message):
   return eliza(message)
 
 def get_news(newspaper_name, number):
-  newspaper = NewsPaper()
-  try:
-    number = int(number)
-  except:
-    number = 1
+	newspaper = NewsPaper()
+	plus = False
+	if number.endswith("+"):
+		plus = True
+		try:
+			number = int(number[:-1])
+		except:
+			number = 1
+	else:
+		try:
+			number = int(number)
+		except:
+			number = 1
   
-  return newspaper_name.title(), newspaper.get_rss(newspaper_name, number)
+	return newspaper_name.title(), newspaper.get_rss(newspaper_name, number, plus)
 
 def weather(city_name, nb_day):
   try:

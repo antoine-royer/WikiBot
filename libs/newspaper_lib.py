@@ -66,7 +66,8 @@ class NewsPaper:
   def __get_data(self):
     return xmltodict.parse(requests.get(self.url).content)
 
-  def get_rss(self, name, nb):
+  def get_rss(self, name, nb, plus):
+    
     self.name = name.lower()
     
     test_available = self.__name_detect()
@@ -88,7 +89,8 @@ class NewsPaper:
     elif self.index == 10: self.data = self.__the_guardian(nb)
     elif self.index == 11: self.data = self.__sciences_et_avenir(nb)
 
-    return self.data, None
+    if plus: return [self.data[-1]], None
+    else: return self.data, None
 
 # --- self.data
 # 0 : Titre

@@ -1,4 +1,4 @@
-# WikiBot (Version 1.7.6)
+# WikiBot (Version 1.7.7)
 
 ## General
 
@@ -6,7 +6,7 @@
 
 WikiBot is a discord bot which makes a wikipedia research, translates a text or discusses with you.
 
-The last version was released on the 11 of October 2020.
+The last version was released on the 7 of November 2020.
 
 ### License
 
@@ -43,7 +43,7 @@ This last function apply an automatic correction on the title given.
 
 ### Get the last news
 
-`/n the_newspaper's_name [& number_of_newspaper_articles]`
+`/n the_newspaper's_name [& number_of_newspaper_articles][+]`
 
 ### Get the weather
 
@@ -90,8 +90,15 @@ Is a good way to start a conversation.
 
 ### The newspaper
 
+`/n The Lancet`
+Returns the last article of the Lancet.
+
 `/n The Lancet & 2`
 Returns the two last articles of The Lancet.
+
+`/n The Lancet & 2+`
+Returns the second article only.
+
 
 ### The weather
 
