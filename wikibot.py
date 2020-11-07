@@ -14,8 +14,8 @@ import libs.wikibot_lib as wl
 from random import randint
 
 client = discord.Client()
-#token = os.environ["token"]
-token = "NzMxMDQzNjg2NjgyNTkxMjYz.Xwr8tw.TG3Xe4BjquY3_rI0BMLh9341pjQ"
+token = os.environ["token"]
+
 __version__ = "1.7.7"
 
 
