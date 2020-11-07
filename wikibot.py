@@ -16,6 +16,7 @@ from random import randint
 client = discord.Client()
 token = os.environ["token"]
 
+
 __version__ = "1.7.7"
 
 
