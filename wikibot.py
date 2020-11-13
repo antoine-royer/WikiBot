@@ -15,7 +15,6 @@ from random import randint
 
 client = discord.Client()
 token = os.environ["token"]
-
 __version__ = "1.7.9"
 
 
@@ -33,7 +32,9 @@ def make_embed(title, description, field, color, image, in_line = False):
 @client.event
 async def on_message(message):
   msg_content, rep = message.content, None
+
   if message.author == client.user: return None
+
   try:
     if msg_content[0] != "/": return None
   except:
@@ -43,11 +44,11 @@ async def on_message(message):
 
   msg_content[0] = msg_content[0].rstrip()
 
-  language = msg_content[2].replace(" ", "")
+  language = msg_content[2].strip().rstrip()
   
   if not language:
     language = "en"
-  wl.wikipedia.set_lang(language)
+  wl.wikipedia.set_lang(language.split()[0])
 
   if not msg_content[0].find("r "):
     rep = make_embed(*wl.page_random(msg_content[0][2:]))
@@ -62,7 +63,10 @@ async def on_message(message):
     rep = make_embed(*wl.page_search(msg_content[0][2:]))
 
   elif not msg_content[0].find("t "):
-    rep = make_embed(*wl.translation(msg_content[0][2:], language), True)
+    try:
+    	rep = make_embed(*wl.translation(msg_content[0][2:], language), True)
+    except:
+    	rep = make_embed("Translation", "Unknown language", [("Error", "The given language is unknown or unavailable. Please refer to the ISO language code.")], 16711680, None)
 
   elif not msg_content[0].find("e "):
     rep = wl.eliza_call(msg_content[0][2:])

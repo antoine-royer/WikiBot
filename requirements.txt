@@ -1,5 +1,5 @@
 discord
 wikipedia
 requests
-googletrans
+deep_translator
 xmltodict
