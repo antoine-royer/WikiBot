@@ -150,10 +150,15 @@ def page_read(name, automatic_correction = False):
 def translation(text, dest_lang):
   trans = Translator()
   
-  try:
-  	lang = trans.detect(text).lang
-  except:
-  	lang = "en"
+  if " " in dest_lang:
+  	dest_lang, lang = dest_lang.split()
+  	dest_lang = dest_lang.strip().rstrip()
+  	lang = lang.strip().rstrip()
+  else:
+  	try:
+  		lang = trans.detect(text).lang
+  	except:
+  		lang = "en"
 
   rep = ["Translation", "From {0} to {1}".format(lang, dest_lang), [], None, None]
   rep[2].append(["Origin text", text])

@@ -1,12 +1,12 @@
-# WikiBot (Version 1.7.8)
+# WikiBot (Version 1.7.9)
 
 ## General
 
 ### Presentation
 
-WikiBot is a discord bot which makes a wikipedia research, translates a text or discusses with you.
+WikiBot is a discord bot which makes wikipedia research, translation of texts and more…
 
-The last version was released on the 11 of November 2020.
+The last version was released on the 13 of November 2020.
 
 ### License
 
@@ -35,7 +35,7 @@ This last function apply an automatic correction on the title given.
 
 ### Translate a text
 
-`/t text_to_translate [& destination_language]`
+`/t text_to_translate [& destination_language [ language]]`
 
 ### Talk with the bot (ELIZA chatbot implementation)
 
@@ -43,7 +43,7 @@ This last function apply an automatic correction on the title given.
 
 ### Get the last news
 
-`/n the_newspaper's_name [& number_of_newspaper_articles][+]`
+`/n the_newspaper's_name [& number_of_newspaper_articles [+]]`
 
 ### Get the weather
 
@@ -80,6 +80,9 @@ Returns the text translated in english.
 
 `/t Hi, I'm fine, nice to meet you ! & de`
 Returns the text translated in german.
+
+`/t Quomodo vales ? & en la`
+Returns the translated text from latin to english.
 
 ### ELIZA chatbot
 

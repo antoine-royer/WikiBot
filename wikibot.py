@@ -1,7 +1,7 @@
 # --------------------------------------------------
-# WikiBot (Version 1.7.8)
+# WikiBot (Version 1.7.9)
 # by Sha-chan~
-# last version released on the 11 of November 2020
+# last version released on the 13 of November 2020
 #
 # code provided with licence :
 # GNU General Public Licence v3.0
@@ -16,7 +16,7 @@ from random import randint
 client = discord.Client()
 token = os.environ["token"]
 
-__version__ = "1.7.8"
+__version__ = "1.7.9"
 
 
 def make_embed(title, description, field, color, image, in_line = False):
@@ -97,9 +97,9 @@ async def on_message(message):
     rep.add_field(name="Make a research on wikipedia", value="`/s < search_terms > [& < language >]`", inline=False)
     rep.add_field(name="Get an article from Wikipedia with the exact title", value="`/p < title > [& < language >]`", inline=False)
     rep.add_field(name="Get an article with an automatic correction on the title", value="`/p+ < title > [& < language >]`", inline=False)
-    rep.add_field(name="Random selection of articles from Wikipedia", value="`/r < nb > [& < language >]`", inline=False)
+    rep.add_field(name="Random selection of articles from Wikipedia", value="`/r < nb > [& < destination_language > [ < language >]]`", inline=False)
     rep.add_field(name="Translate a text", value="`/t < text > [& < language >]`", inline=False)
-    rep.add_field(name="Get some news", value="`/n < newspaper_name > [& < number_of_article >][+]`", inline=False)
+    rep.add_field(name="Get some news", value="`/n < newspaper_name > [& < number_of_article > [+]]`", inline=False)
     rep.add_field(name="Get the weather", value="`/w < city name > [& < day_of_forecast >]` for the day : 0 is today, 1 tomorrow…", inline=False)
     rep.add_field(name="Talk with Eliza", value="`/e < message >`", inline=False)
     rep.add_field(name="Complete documentation", value="https://github.com/Shadow15510/WikiBot/blob/master/README.md", inline=False)
