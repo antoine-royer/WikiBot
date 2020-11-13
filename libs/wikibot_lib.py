@@ -153,8 +153,6 @@ def translation(text, language):
   if " " in language:
     dest_lang, src_lang = language.split()
 
-  print(f"'{dest_lang}'\n'{src_lang}'")
-
   translation = GoogleTranslator(source = src_lang, target = dest_lang).translate(text = text) 
   rep = ["Translation", f"From {src_lang} to {dest_lang}", [], None, None]
   rep[2].append(["Origin text", text])
@@ -162,9 +160,6 @@ def translation(text, language):
   return rep
 
 def eliza_call(message):
-  language = Translator()
-  if language.detect(message).lang != "en":
-    return "I'm sorry, I only speak english…"
   return eliza(message)
 
 def get_news(newspaper_name, number):
