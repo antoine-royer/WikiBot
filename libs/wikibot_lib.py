@@ -10,10 +10,10 @@ from libs.eliza_lib import eliza
 def math_formula_detection(text, source_code, index = 0):
 	def get_start(source_code, index = 0):
 		end = source_code.find('<span class="mwe-math-element">', index)
-			if end == -1: return None
-			start = end
-			while not source_code[start].isupper(): start -= 1
-				eturn text_formater(source_code[start: end])
+		if end == -1: return None
+		start = end
+		while not source_code[start].isupper(): start -= 1
+			return text_formater(source_code[start: end])
 		
 	def get_end(source_code, index = 0):
 		start = 10 + source_code.find(' alttext="', source_code.find('<span class="mwe-math-element">', index))
