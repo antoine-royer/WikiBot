@@ -1,6 +1,6 @@
 import wikipedia
 import requests
-from goslate import Goslate
+from googletrans import Translator
 
 from libs.newspaper_lib import NewsPaper
 from libs.weather_lib import get_weather
@@ -148,23 +148,28 @@ def page_read(name, automatic_correction = False):
   return page
 
 def translation(text, language):
-  translator = Goslate()
-  lang = translator.get_languages()
-  dest_lang, src_lang = language, translator.detect(text)
+  translator = Translator()
+  dest_lang = language
+
+  try:
+    src_lang = translator.detect(text).lang 
+  except:
+    src_lang = "en"
 
   if " " in language:
     dest_lang, src_lang = language.split()
 
+
   translation = translator.translate(text, dest_lang, src_lang)
-  rep = ["Translation", f"From {lang[src_lang]} to {lang[dest_lang]}", [], None, None]
+  rep = ["Translation", f"From {src_lang} to {dest_lang}", [], None, None]
   rep[2].append(["Origin text", text])
-  rep[2].append(["Translated text", translation])
+  rep[2].append(["Translated text", translation.text])
+  rep[2].append(["Pronunciation", translation.pronunciation])
   return rep
 
 def eliza_call(message):
-  language = Goslate()
-  language = language.detect(message)
-  if language != "en":
+  language = Translator()
+  if language.detect(message).lang != "en":
     return "Sorry, I only speak english…"
   return eliza(message)
 
