@@ -1,6 +1,6 @@
 import wikipedia
 import requests
-from deep_translator import GoogleTranslator
+from goslate import Goslate
 
 from libs.newspaper_lib import NewsPaper
 from libs.weather_lib import get_weather
@@ -148,18 +148,24 @@ def page_read(name, automatic_correction = False):
   return page
 
 def translation(text, language):
-  dest_lang, src_lang = language, "auto"
+  translator = Goslate()
+  lang = translator.get_languages()
+  dest_lang, src_lang = language, translator.detect(text)
 
   if " " in language:
     dest_lang, src_lang = language.split()
 
-  translation = GoogleTranslator(source = src_lang, target = dest_lang).translate(text = text) 
-  rep = ["Translation", f"From {src_lang} to {dest_lang}", [], None, None]
+  translation = translator.translate(text, dest_lang, src_lang)
+  rep = ["Translation", f"From {lang[src_lang]} to {lang[dest_lang]}", [], None, None]
   rep[2].append(["Origin text", text])
   rep[2].append(["Translated text", translation])
   return rep
 
 def eliza_call(message):
+  language = Goslate()
+  language = language.detect(message)
+  if language != "en":
+    return "Sorry, I only speak english…"
   return eliza(message)
 
 def get_news(newspaper_name, number):
