@@ -1,52 +1,53 @@
 import wikipedia
 import requests
 import mytrans
+import json
 
 from libs.newspaper_lib import NewsPaper
 from libs.weather_lib import get_weather
 from libs.eliza_lib import eliza
 
 def math_formula_detection(text, source_code, index = 0):
-		def get_start(source_code, index = 0):
-				end = source_code.find('<span class="mwe-math-element">', index)
-				if end == -1: return None
-				start = end
-				while not source_code[start].isupper(): start -= 1
-				return text_formater(source_code[start: end])
+	def get_start(source_code, index = 0):
+		end = source_code.find('<span class="mwe-math-element">', index)
+			if end == -1: return None
+			start = end
+			while not source_code[start].isupper(): start -= 1
+				eturn text_formater(source_code[start: end])
 		
-		def get_end(source_code, index = 0):
-				start = 10 + source_code.find(' alttext="', source_code.find('<span class="mwe-math-element">', index))
-				end = source_code.find('"', start)
-				return text_formater(source_code[start: end]), end
+	def get_end(source_code, index = 0):
+		start = 10 + source_code.find(' alttext="', source_code.find('<span class="mwe-math-element">', index))
+		end = source_code.find('"', start)
+		return text_formater(source_code[start: end]), end
 
-		def chevrons(text):
-				if text.find(">") < text.find("<"): text = "<" + text
-				while "<" in text or ">" in text:
-						start = text.find("<")
-						end = text.find(">", start) + 1
-						text = text[:start] + " " + text[end:]
-				return text
+	def chevrons(text):
+		if text.find(">") < text.find("<"): text = "<" + text
+		while "<" in text or ">" in text:
+				start = text.find("<")
+				end = text.find(">", start) + 1
+				text = text[:start] + " " + text[end:]
+		return text
 
-		def text_formater(text):
-				char = "\n .:!?,;0123456789&#"
-				for pattern in ("amp;", ""):
-						text = text.replace(pattern, "")
-				text = chevrons(text)
-				return text.replace("	", " ").strip(char).rstrip(char)
+	def text_formater(text):
+		char = "\n .:!?,;0123456789&#"
+		for pattern in ("amp;", ""):
+				text = text.replace(pattern, "")
+		text = chevrons(text)
+		return text.replace("	", " ").strip(char).rstrip(char)
 
-		start = get_start(source_code, index)
-		if not start: return text
-		lenght_start = len(start)		
-		start = text.find(start)
+	start = get_start(source_code, index)
+	if not start: return text
+	lenght_start = len(start)		
+	start = text.find(start)
 		
-		end, index = get_end(source_code, index)
-		lenght_end = len(end)
-		end = text.find(end)
+	end, index = get_end(source_code, index)
+	lenght_end = len(end)
+	end = text.find(end)
 
 		
-		if start == -1 or end == -1: return text
-		else:
-				return text[:start + lenght_start].rstrip("\n ") + " [ *formule* ].\n" + math_formula_detection(text[end + lenght_end:].strip("\n ."), source_code, index) 
+	if start == -1 or end == -1: return text
+	else:
+		return text[:start + lenght_start].rstrip("\n ") + " [ *formule* ].\n" + math_formula_detection(text[end + lenght_end:].strip("\n ."), source_code, index) 
 
 def page_content(name, limit = 1000):
 	
@@ -151,10 +152,10 @@ def translation(text, src_lang, dest_lang):
 	if " " in src_lang:
 		src_lang, dest_lang = src_lang.split()
 
-	translation = mytrans.deepl(text, target_lang = dest_lang, source_lang = src_lang).res
+	translation = json.loads(mytrans.deepl(text, target_lang = dest_lang, source_lang = src_lang).text)
 	rep = ["Translation", f"From {src_lang.lower()} to {dest_lang.lower()}", [], None, None]
 	rep[2].append(["Origin text", text])
-	rep[2].append(["Translated text", translation[0]])
+	rep[2].append(["Translated text", translation["result"]["translations"][0]["beams"][0]["postprocessed_sentence"]])
 	return rep
 
 def eliza_call(message):
