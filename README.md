@@ -35,7 +35,7 @@ This last function apply an automatic correction on the title given.
 
 ### Translate a text
 
-`/t text_to_translate [& destination_language [ language]]`
+`/t text_to_translate & source_language destination_language`
 
 ### Talk with the bot (ELIZA chatbot implementation)
 
@@ -75,14 +75,11 @@ Returns a list of wikipedia pages in english about the 'sea'.
 
 ### Translation
 
-`/t Bonjour, je suis un bot`
+`/t Bonjour, je suis un bot & fr`
 Returns the text translated in english.
 
-`/t Hi, I'm fine, nice to meet you ! & de`
+`/t Hi, I'm fine, nice to meet you ! & en de`
 Returns the text translated in german.
-
-`/t Quomodo vales ? & en la`
-Returns the translated text from latin to english.
 
 ### ELIZA chatbot
 
