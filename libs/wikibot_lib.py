@@ -1,7 +1,5 @@
 import wikipedia
 import requests
-import mytrans
-import json
 
 from libs.newspaper_lib import NewsPaper
 from libs.weather_lib import get_weather
@@ -147,16 +145,6 @@ def page_read(name, automatic_correction = False):
 		page[2].append(["Error", f"There is none page named : '{name}'. Please check the page's name."])
 
 	return page
-
-def translation(text, src_lang, dest_lang):
-	if " " in src_lang:
-		src_lang, dest_lang = src_lang.split()
-
-	translation = json.loads(mytrans.deepl(text, target_lang = dest_lang, source_lang = src_lang).text)
-	rep = ["Translation", f"From {src_lang.lower()} to {dest_lang.lower()}", [], None, None]
-	rep[2].append(["Origin text", text])
-	rep[2].append(["Translated text", translation["result"]["translations"][0]["beams"][0]["postprocessed_sentence"]])
-	return rep
 
 def eliza_call(message):
 	return eliza(message)

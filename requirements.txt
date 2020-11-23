@@ -1,5 +1,4 @@
 discord
 wikipedia
 requests
-mytrans
 xmltodict

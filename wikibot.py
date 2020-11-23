@@ -1,7 +1,7 @@
 # --------------------------------------------------
-# WikiBot (Version 1.8)
+# WikiBot (Version 1.9)
 # by Sha-chan~
-# last version released on the 14 of November 2020
+# last version released on the 22 of November 2020
 #
 # code provided with licence :
 # GNU General Public Licence v3.0
@@ -15,7 +15,7 @@ from random import randint
 
 client = discord.Client()
 token = os.environ["token"]
-__version__ = "1.8"
+__version__ = "1.9"
 
 
 def make_embed(title, description, field, color, image, in_line = False):
@@ -61,16 +61,7 @@ async def on_message(message):
 
 	elif not msg_content[0].find("s "):
 		rep = make_embed(*wl.page_search(msg_content[0][2:]))
-
-	elif not msg_content[0].find("t "):
-		if not msg_content[1]:
-			rep = make_embed("Translation", "Unknown language", [("Error", "The given language is unknown or unavailable. Please refer to the ISO language code and syntax.")], 16711680, None)
-		else:
-			try:
-				rep = make_embed(*wl.translation(msg_content[0][2:], language, "en"), True)
-			except:
-						rep = make_embed("Translation", "Unknown language", [("Error", "The given language is unknown or unavailable. Please refer to the ISO language code and syntax.")], 16711680, None)
-			
+	
 	elif not msg_content[0].find("e "):
 		rep = wl.eliza_call(msg_content[0][2:])
 
@@ -105,7 +96,6 @@ async def on_message(message):
 		rep.add_field(name="Get an article from Wikipedia with the exact title", value="`/p < title > [& < language >]`", inline=False)
 		rep.add_field(name="Get an article with an automatic correction on the title", value="`/p+ < title > [& < language >]`", inline=False)
 		rep.add_field(name="Random selection of articles from Wikipedia", value="`/r < nb > [& < language >]`", inline=False)
-		rep.add_field(name="Translate a text", value="`/t < text > & < source_language > < destination_language >`", inline=False)
 		rep.add_field(name="Get some news", value="`/n < newspaper_name > [& < number_of_article > [+]]`", inline=False)
 		rep.add_field(name="Get the weather", value="`/w < city name > [& < day_of_forecast >]` for the day : 0 is today, 1 tomorrow…", inline=False)
 		rep.add_field(name="Talk with Eliza", value="`/e < message >`", inline=False)
