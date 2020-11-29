@@ -27,7 +27,7 @@ def make_embed(title, description, field, color, image, in_line = False, thumb =
 		
 	if image:
 		if thumb: answer.set_thumbnail(url=image)
-        else: answer.set_image(url=image)
+		else: answer.set_image(url=image)
 	return answer
 
 @client.event
