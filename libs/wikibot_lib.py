@@ -64,7 +64,7 @@ def page_content(name, limit = 1000):
 				"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disambig_colour.svg/20px-Disambig_colour.svg.png",
 				"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Arithmetic_symbols.svg/24px-Arithmetic_symbols.svg.png",
 				"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Racine_carr%C3%A9e_bleue.svg/24px-Racine_carr%C3%A9e_bleue.svg.png"
-				):
+				) and not ("<" in url or ">" in url):
 				return url
 	
 	try:
