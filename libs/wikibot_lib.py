@@ -47,6 +47,7 @@ def math_formula_detection(text, source_code, index = 0):
 	else:
 		return text[:start + lenght_start].rstrip("\n ") + " [ *formule* ].\n" + math_formula_detection(text[end + lenght_end:].strip("\n ."), source_code, index) 
 
+
 def page_content(name, limit = 1000):
 	
 	def image_detect(source_code):
@@ -86,6 +87,7 @@ def page_content(name, limit = 1000):
 	except:
 		return name.capitalize(), "", "", "", False
 
+
 def list_pages(l_page, title, description, limit = 1000):
 	pages = [title, description, [], None, None]
 
@@ -101,6 +103,7 @@ def list_pages(l_page, title, description, limit = 1000):
 
 	return pages
 
+
 def page_random(nb):
 	try:
 		nb = int(nb)
@@ -114,6 +117,7 @@ def page_random(nb):
 	rand = wikipedia.random(nb)
 	return list_pages(rand, "Random articles", f"{nb} random articles on Wikipedia", 500)
 
+
 def page_search(name):
 	rslt = wikipedia.search(name, results=5)
 	
@@ -124,7 +128,8 @@ def page_search(name):
 		rep = ["Wikipedia research", f"Results of the research for '{name}'", [], 0xff0000, None]
 		rep[2].append(["Error", "There is none article corresponds to your research. Please check your search terms."])
 		return rep
-	
+
+
 def page_read(name, automatic_correction = False):
 	def auto_name(name):
 		try:
@@ -146,8 +151,10 @@ def page_read(name, automatic_correction = False):
 
 	return page
 
+
 def eliza_call(message):
 	return eliza(message)
+
 
 def get_news(newspaper_name, number):
 	newspaper = NewsPaper()
@@ -165,6 +172,7 @@ def get_news(newspaper_name, number):
 			number = 1
 	
 	return newspaper_name.title(), newspaper.get_rss(newspaper_name, number, plus)
+
 
 def weather(city_name, nb_day):
 	try:

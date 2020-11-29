@@ -25,12 +25,12 @@ def make_embed(title, description, field, color, image, in_line = False, thumb =
 	for i in field:
 		answer.add_field(name=i[0], value=i[1], inline=in_line)
 	
-    try:
-    	if image:
-    		if thumb: answer.set_thumbnail(url=image)
-    		else: answer.set_image(url=image)
-    except:
-        continue
+	try:
+		if image:
+			if thumb: answer.set_thumbnail(url=image)
+			else: answer.set_image(url=image)
+	except:
+		continue
 	return answer
 
 @client.event
