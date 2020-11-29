@@ -26,7 +26,10 @@ def make_embed(title, description, field, color, image, in_line = False, thumb =
 		answer.add_field(name=i[0], value=i[1], inline=in_line)
 	
 	if image:
-		print(image)
+
+		# Test image
+		print(f"\n\nIMAGE TEST\n{image}\nFIN IMAGE TEST\n\n")
+
 		if thumb: answer.set_thumbnail(url=image)
 		else: answer.set_image(url=image)
 	return answer
