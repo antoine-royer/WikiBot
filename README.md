@@ -1,4 +1,4 @@
-# WikiBot (Version 1.9)
+# WikiBot (Version 1.9.1)
 
 ## General
 
@@ -6,7 +6,7 @@
 
 WikiBot is a discord bot which makes wikipedia research, weather forecasts and more…
 
-The last version was released on the 22 of November 2020.
+The last version was released on the 29 of November 2020.
 
 ### License
 

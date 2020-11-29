@@ -1,7 +1,7 @@
 # --------------------------------------------------
-# WikiBot (Version 1.9)
+# WikiBot (Version 1.9.1)
 # by Sha-chan~
-# last version released on the 22 of November 2020
+# last version released on the 29 of November 2020
 #
 # code provided with licence :
 # GNU General Public Licence v3.0
@@ -15,10 +15,10 @@ from random import randint
 
 client = discord.Client()
 token = os.environ["token"]
-__version__ = "1.9"
+__version__ = "1.9.1"
 
 
-def make_embed(title, description, field, color, image, in_line = False):
+def make_embed(title, description, field, color, image, in_line = False, thumb = False):
 	if not color: color = randint(0, 16777215)
 	answer = discord.Embed(title=title, description=description, color=color)
 
@@ -26,7 +26,8 @@ def make_embed(title, description, field, color, image, in_line = False):
 		answer.add_field(name=i[0], value=i[1], inline=in_line)
 		
 	if image:
-		answer.set_image(url=image)
+		if thumb: answer.set_thumbnail(url=image)
+        else: answer.set_image(url=image)
 	return answer
 
 @client.event
@@ -75,7 +76,7 @@ async def on_message(message):
 			if day == 0: day = f"today : {datetime}"
 			elif day == 1: day = f"tomorrow : {datetime}"
 			else: day = f"in {day} days : {datetime}"
-			rep = make_embed("Weather", f"{city_name} {day} ({timezone})", rep, None, img, True)
+			rep = make_embed("Weather", f"{city_name} {day} ({timezone})", rep, None, img, True, True)
 
 			rep.set_footer(text = "Weather forecast provided by OpenWeather", icon_url = "https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png")
 
