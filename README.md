@@ -1,4 +1,4 @@
-# WikiBot (Version 1.9.1)
+# WikiBot (Version 1.9.2)
 
 ## General
 

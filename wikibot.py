@@ -1,5 +1,5 @@
 # --------------------------------------------------
-# WikiBot (Version 1.9.1)
+# WikiBot (Version 1.9.2)
 # by Sha-chan~
 # last version released on the 29 of November 2020
 #
@@ -15,7 +15,7 @@ from random import randint
 
 client = discord.Client()
 token = os.environ["token"]
-__version__ = "1.9.1"
+__version__ = "1.9.2"
 
 
 def make_embed(title, description, field, color, image, in_line = False, thumb = False):
@@ -24,10 +24,13 @@ def make_embed(title, description, field, color, image, in_line = False, thumb =
 
 	for i in field:
 		answer.add_field(name=i[0], value=i[1], inline=in_line)
-		
-	if image:
-		if thumb: answer.set_thumbnail(url=image)
-		else: answer.set_image(url=image)
+	
+    try:
+    	if image:
+    		if thumb: answer.set_thumbnail(url=image)
+    		else: answer.set_image(url=image)
+    except:
+        continue
 	return answer
 
 @client.event
