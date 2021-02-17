@@ -3,7 +3,6 @@ import requests
 
 from libs.newspaper_lib import NewsPaper
 from libs.weather_lib import get_weather
-from libs.eliza_lib import eliza
 
 def math_formula_detection(text, source_code, index = 0):
     def get_start(source_code, index = 0):
@@ -155,10 +154,6 @@ def page_read(name, automatic_correction = False):
         page[2].append(["Error", f"There is none page named : '{name}'. Please check the page's name."])
 
     return page
-
-
-def eliza_call(message):
-    return eliza(message)
 
 
 def get_news(newspaper_name, number):
