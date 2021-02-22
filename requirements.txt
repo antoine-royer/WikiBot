@@ -3,3 +3,4 @@ wikipedia
 requests
 xmltodict
 bs4
+html5lib
