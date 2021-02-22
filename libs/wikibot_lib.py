@@ -1,51 +1,13 @@
 import wikipedia
 import requests
+from bs4 import BeautifulSoup
 
 from libs.newspaper_lib import NewsPaper
 from libs.weather_lib import get_weather
 
-def math_formula_detection(text, source_code, index = 0):
-    def get_start(source_code, index = 0):
-        end = source_code.find('<span class="mwe-math-element">', index)
-        if end == -1: return None
-        start = end
-        while not source_code[start].isupper(): start -= 1
-        return text_formater(source_code[start: end])
-        
-    def get_end(source_code, index = 0):
-        start = 10 + source_code.find(' alttext="', source_code.find('<span class="mwe-math-element">', index))
-        end = source_code.find('"', start)
-        return text_formater(source_code[start: end]), end
-
-    def chevrons(text):
-        if text.find(">") < text.find("<"): text = "<" + text
-        while "<" in text or ">" in text:
-                start = text.find("<")
-                end = text.find(">", start) + 1
-                text = text[:start] + " " + text[end:]
-        return text
-
-    def text_formater(text):
-        char = "\n .:!?,;0123456789&#"
-        for pattern in ("amp;", ""):
-                text = text.replace(pattern, "")
-        text = chevrons(text)
-        return text.replace("   ", " ").strip(char).rstrip(char)
-
-    start = get_start(source_code, index)
-    if not start: return text
-    lenght_start = len(start)       
-    start = text.find(start)
-        
-    end, index = get_end(source_code, index)
-    lenght_end = len(end)
-    end = text.find(end)
-
-        
-    if start == -1 or end == -1: return text
-    else:
-        return text[:start + lenght_start].rstrip("\n ") + " [ *formule* ].\n" + math_formula_detection(text[end + lenght_end:].strip("\n ."), source_code, index) 
-
+def math_formula_detection(text, source_code):
+    for math_element in BeautifulSoup(source_code, features="html5lib").find_all("span", {"class": "mwe-math-element"}):
+        text = text.replace(math_element.text[:-3], "[ *formule* ]")
 
 def page_content(name, limit = 1000):
     
