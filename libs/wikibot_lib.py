@@ -6,7 +6,7 @@ from libs.newspaper_lib import NewsPaper
 from libs.weather_lib import get_weather
 
 def math_formula_detection(summary, source_code):
-    for math_element in BeautifulSoup(source_code).find_all("span", {"class": "mwe-math-element"}):
+    for math_element in BeautifulSoup(source_code, features="html5lib").find_all("span", {"class": "mwe-math-element"}):
         summary = summary.replace(math_element.text[:-3], "[ *formula* ]")
 
     return summary
