@@ -7,7 +7,9 @@ from libs.weather_lib import get_weather
 
 def math_formula_detection(text, source_code):
     for math_element in BeautifulSoup(source_code, features="html5lib").find_all("span", {"class": "mwe-math-element"}):
-        text = text.replace(math_element.text[:-3], "[ *formule* ]")
+        text = text.replace(math_element.text[:-3], "[ *formula* ]")
+
+    return text
 
 def page_content(name, limit = 1000):
     
