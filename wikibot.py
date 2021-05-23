@@ -1,7 +1,7 @@
 # --------------------------------------------------
 # WikiBot (Version 2.0)
 # by Sha-chan~
-# last version released on the 22 of Febuary 2021
+# last version released on the 23 of May 2021
 #
 # code provided with licence :
 # GNU General Public Licence v3.0
@@ -15,7 +15,7 @@ from random import randint
 
 client = discord.Client()
 token = os.environ["token"]
-__version__ = "2.0"
+__version__ = "2.1"
 
 
 def make_embed(title, description, field, color, image, in_line = False, thumb = False):
@@ -83,8 +83,8 @@ async def on_message(message):
         if news[0]:
             news = news[0]
             rep = []
-            for article in news:
-                rep.append(make_embed(embed_title, article[0], (("Summary", article[1]), ("Link", article[2])), None, article[3]))
+            for index, article in enumerate(news):
+                rep.append(make_embed(f"{embed_title} (#{index + 1})", article[0], (("Summary", article[1]), ("Link", article[2])), None, article[3]))
         else:
             rep = make_embed(embed_title, "Unknown newspaper", (("Error", "The newspaper requested isn't registrated"), ("Newspapers available", " - ".join(news[1]))), 16711680, None)
         
