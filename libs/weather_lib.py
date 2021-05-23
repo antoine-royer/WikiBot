@@ -3,7 +3,8 @@ import os
 import time
 
 def get_weather(city_name, day):
-    api_key = os.environ["weather_token"]   
+    # api_key = os.environ["weather_token"]
+    api_key = "de29d216d1e369c59a6a3ec5a7a49cc8"    
     weather_data = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={api_key}").json()
 
     lon, lat = weather_data["coord"]["lon"], weather_data["coord"]["lat"]

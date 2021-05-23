@@ -1,4 +1,4 @@
-# WikiBot (Version 2.0)
+# WikiBot (Version 2.1)
 
 ## General
 
@@ -6,7 +6,7 @@
 
 WikiBot is a discord bot which makes wikipedia research, weather forecasts and more…
 
-The last version was released on the 22 of Febuary 2021.
+The last version was released on the 23 of May 2021.
 
 ### License
 
@@ -75,6 +75,8 @@ Returns the two last articles of The Lancet.
 
 `/n The Lancet & 2+`
 Returns the second article only.
+
+The number of the article is specified on the embed title.
 
 
 ### The weather

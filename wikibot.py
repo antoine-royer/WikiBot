@@ -1,5 +1,5 @@
 # --------------------------------------------------
-# WikiBot (Version 2.0)
+# WikiBot (Version 2.1)
 # by Sha-chan~
 # last version released on the 23 of May 2021
 #
