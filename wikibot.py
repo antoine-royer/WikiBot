@@ -37,7 +37,7 @@ async def on_message(message):
     if message.author == client.user: return None
 
     try:
-        if msg_content[0] != "/": return None
+        if msg_content[0] != "&": return None
     except:
         return None
 
@@ -90,12 +90,12 @@ async def on_message(message):
         
     elif msg_content[0] == "help":
         rep = discord.Embed(title=f"Help pannel (WikiBot v{__version__})", description="List of available commands", color=randint(0, 16777215))
-        rep.add_field(name="Make a research on wikipedia", value="`/s < search_terms > [& < language >]`", inline=False)
-        rep.add_field(name="Get an article from Wikipedia with the exact title", value="`/p < title > [& < language >]`", inline=False)
-        rep.add_field(name="Get an article with an automatic correction on the title", value="`/p+ < title > [& < language >]`", inline=False)
-        rep.add_field(name="Random selection of articles from Wikipedia", value="`/r < nb > [& < language >]`", inline=False)
-        rep.add_field(name="Get some news", value="`/n < newspaper_name > [& < number_of_article > [+]]`", inline=False)
-        rep.add_field(name="Get the weather", value="`/w < city name > [& < day_of_forecast >]` for the day : 0 is today, 1 tomorrow…", inline=False)
+        rep.add_field(name="Make a research on wikipedia", value="`&s < search_terms > [& < language >]`", inline=False)
+        rep.add_field(name="Get an article from Wikipedia with the exact title", value="`&p < title > [& < language >]`", inline=False)
+        rep.add_field(name="Get an article with an automatic correction on the title", value="`&p+ < title > [& < language >]`", inline=False)
+        rep.add_field(name="Random selection of articles from Wikipedia", value="`&r < nb > [& < language >]`", inline=False)
+        rep.add_field(name="Get some news", value="`&n < newspaper_name > [& < number_of_article > [+]]`", inline=False)
+        rep.add_field(name="Get the weather", value="`&w < city name > [& < day_of_forecast >]` for the day : 0 is today, 1 tomorrow…", inline=False)
         rep.add_field(name="Complete documentation", value="https://github.com/Shadow15510/WikiBot/blob/master/README.md", inline=False)
 
     if not rep: return None
@@ -109,7 +109,7 @@ async def on_message(message):
 
 @client.event
 async def on_ready():
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="/help"))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="&help"))
     print("Online.")
 
 client.run(token)
