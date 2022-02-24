@@ -122,9 +122,9 @@ def page_read(name, automatic_correction = False):
 
 def get_news(newspaper_name, number):
     newspaper = NewsPaper()
-    plus = False
+    plus = 0
     if number.endswith("+"):
-        plus = True
+        plus = number
         try:
             number = int(number[:-1])
         except:
@@ -135,7 +135,7 @@ def get_news(newspaper_name, number):
         except:
             number = 1
     
-    return newspaper_name.title(), newspaper.get_rss(newspaper_name, number, plus)
+    return newspaper_name.title(), newspaper.get_rss(newspaper_name, number, plus), plus
 
 
 def weather(city_name, nb_day):

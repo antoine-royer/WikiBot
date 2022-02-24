@@ -78,13 +78,16 @@ async def on_message(message):
             rep.set_footer(text = "Weather forecast provided by OpenWeather", icon_url = "https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png")
 
     elif not msg_content[0].find("n "):
-        name, news = wl.get_news(msg_content[0][2:], language)
+        name, news, selection = wl.get_news(msg_content[0][2:], language)
         embed_title = f"**{name}**"
         if news[0]:
             news = news[0]
             rep = []
-            for index, article in enumerate(news):
-                rep.append(make_embed(f"{embed_title} (#{index + 1})", article[0], (("Summary", article[1]), ("Link", article[2])), None, article[3]))
+            if not selection:
+                for index, article in enumerate(news):
+                    rep.append(make_embed(f"{embed_title} (#{index + 1})", article[0], (("Summary", article[1]), ("Link", article[2])), None, article[3]))
+            else:
+                rep.append(make_embed(f"{embed_title} (#{selection})", article[0], (("Summary", article[1]), ("Link", article[2])), None, article[3]))
         else:
             rep = make_embed(embed_title, "Unknown newspaper", (("Error", "The newspaper requested isn't registrated"), ("Newspapers available", " - ".join(news[1]))), 16711680, None)
         
