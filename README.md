@@ -14,7 +14,7 @@ This code was provided with license GNU General Public License v3.0.
 
 ### Adding WikiBot
 
-For adding WikiBot to your server, please [click here](https://discord.com/api/oauth2/authorize?client_id=731043686682591263&permissions=8&scope=bot).
+For adding WikiBot to your server, please [click here](https://discord.com/api/oauth2/authorize?client_id=731043686682591263&permissions=274877991936&scope=bot).
 
 ## Features and command
 
