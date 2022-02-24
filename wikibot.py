@@ -41,7 +41,7 @@ async def on_message(message):
     except:
         return None
 
-    msg_content = list(msg_content[1:].partition("!"))
+    msg_content = list(msg_content[1:].partition("&"))
 
     msg_content[0] = msg_content[0].rstrip()
 
