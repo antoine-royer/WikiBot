@@ -87,7 +87,7 @@ async def on_message(message):
                 for index, article in enumerate(news):
                     rep.append(make_embed(f"{embed_title} (#{index + 1})", article[0], (("Summary", article[1]), ("Link", article[2])), None, article[3]))
             else:
-                rep.append(make_embed(f"{embed_title} (#{selection})", article[0], (("Summary", article[1]), ("Link", article[2])), None, article[3]))
+                rep.append(make_embed(f"{embed_title} (#{selection})", news[0][0], (("Summary", news[0][1]), ("Link", news[0][2])), None, news[0][3]))
         else:
             rep = make_embed(embed_title, "Unknown newspaper", (("Error", "The newspaper requested isn't registrated"), ("Newspapers available", " - ".join(news[1]))), 16711680, None)
         
