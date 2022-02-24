@@ -124,7 +124,7 @@ def get_news(newspaper_name, number):
     newspaper = NewsPaper()
     plus = 0
     if number.endswith("+"):
-        plus = number
+        plus = int(number[:-1])
         try:
             number = int(number[:-1])
         except:
