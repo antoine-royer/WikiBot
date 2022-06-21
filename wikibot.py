@@ -39,6 +39,7 @@ def make_embed(title, description, field, color, image, in_line = False, thumb =
 @slash.slash(name="r", description="Random selection of articles from Wikipedia")
 async def r(ctx, number: int=1, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
+    await ctx.send(type(number))
     await ctx.send(embed=make_embed(*wl.page_random(number)))
 
 

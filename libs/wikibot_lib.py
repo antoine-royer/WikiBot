@@ -51,7 +51,7 @@ def page_content(name, limit = 1000):
         return name.capitalize(), "", "", "", False
 
 
-def list_pages(l_page, title, description, limit = 1000):
+def list_pages(l_page, title, description, limit=1000):
     pages = [title, description, [], None, None]
 
     if type(l_page) == list:
@@ -84,10 +84,10 @@ def page_search(name):
         return rep
 
 
-def page_read(name, automatic_correction = False):
+def page_read(name, automatic_correction=False):
     def auto_name(name):
         try:
-            for i in wikipedia.search(name, results = 3):
+            for i in wikipedia.search(name, results=3):
                 try:
                     wikipedia.WikipediaPage(i)
                     return i
