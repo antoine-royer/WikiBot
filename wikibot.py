@@ -39,32 +39,32 @@ async def on_ready():
     print("Online.")
 
 
-@slash.slash(name="r", description="Random selection of articles from Wikipedia", guild_ids=guild_ids)
-async def r(ctx, number: int, language: str="en"):
+@slash.slash(name="random articles", description="Random selection of articles from Wikipedia", guild_ids=guild_ids)
+async def _random_article(ctx, number: int, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
     await ctx.send(embed=make_embed(*wl.page_random(number)))
 
 
-@slash.slash(name="p-auto", description="Get an article with an automatic correction on the title", guild_ids=guild_ids)
-async def pauto(ctx, research: str, language: str="en"):
+@slash.slash(name="advanced article", description="Get an article with an automatic correction on the title", guild_ids=guild_ids)
+async def _advanced_article(ctx, research: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
     await ctx.send(embed=make_embed(*wl.page_read(research, True)))
 
 
-@slash.slash(name="p", description="Get an article from Wikipedia with the exact title", guild_ids=guild_ids)
-async def p(ctx, research: str, language: str="en"):
+@slash.slash(name="article", description="Get an article from Wikipedia with the exact title", guild_ids=guild_ids)
+async def _article(ctx, research: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
     await ctx.send(embed=make_embed(*wl.page_read(research)))
 
 
-@slash.slash(name="s", description="Make a research on wikipedia", guild_ids=guild_ids)
-async def s(ctx, research: str, language: str="en"):
+@slash.slash(name="search", description="Make a research on wikipedia", guild_ids=guild_ids)
+async def _search(ctx, research: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
     await ctx.send(embed=make_embed(*wl.page_search(research)))
 
 
-@slash.slash(name="w", description="Get the weather", guild_ids=guild_ids)
-async def w(ctx, city_name: str, forecast: int=1):
+@slash.slash(name="weather", description="Get the weather", guild_ids=guild_ids)
+async def _weather(ctx, city_name: str, forecast: int=1):
     rep, img, day, timezone, datetime = wl.weather(city_name, forecast)
     if not rep:
         rep = make_embed("Weather", "Unknown city's name", [("Error", f"No city were found for the name : '{city_name}'. Please check the city's name.")], 16711680, None)
@@ -78,8 +78,8 @@ async def w(ctx, city_name: str, forecast: int=1):
     await ctx.send(embed=rep)
 
 
-@slash.slash(name="n", description="Get some news", guild_ids=guild_ids)
-async def n(ctx, newspaper: str, nb_article: int=1, is_selected: bool=False):
+@slash.slash(name="news", description="Get some news", guild_ids=guild_ids)
+async def _news(ctx, newspaper: str, nb_article: int=1, is_selected: bool=False):
     name, news, selection = wl.get_news(newspaper, nb_article, is_selected)
     embed_title = f"**{name}**"
     if news[0]:
