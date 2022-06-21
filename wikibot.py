@@ -8,13 +8,14 @@
 # --------------------------------------------------
 
 import discord
+import discord_slash
 import os
 import libs.wikibot_lib as wl
 
 from random import randint
 
 client = discord.Client()
-slash = discord.SlashCommand(client, sync_command=True)
+slash = discord_slash.SlashCommand(client, sync_command=True)
 token = os.environ["token"]
 __version__ = "2.1.2"
 
