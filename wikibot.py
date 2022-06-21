@@ -8,16 +8,14 @@
 # --------------------------------------------------
 
 import discord
-from discord.ext import commands
-import discord_slash
+from discord_slash import SlashCommand
 import os
 import libs.wikibot_lib as wl
 from random import randint
 
-
-intents = discord.Intents.all()
-client = commands.Bot(command_prefix="*", intents=intents)
+client = discord.Client(intents=discord.Intents.all())
 slash = discord_slash.SlashCommand(client, sync_commands=True)
+
 token = os.environ["token"]
 __version__ = "2.2.0"
 guild_ids = [658281779408535552, 685936220395929600, 688378964636336128, 694107785574613003, 750778113503264938, 774980578621259826, 780134704962601022]
