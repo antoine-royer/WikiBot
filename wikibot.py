@@ -90,7 +90,7 @@ async def n(ctx, newspaper: str, nb_article: int=1, is_selected: bool=False):
             rep.append(make_embed(f"{embed_title} (#{selection})", news[0][0], (("Summary", news[0][1]), ("Link", news[0][2])), None, news[0][3]))
     else:
         rep = make_embed(embed_title, "Unknown newspaper", (("Error", "The newspaper requested isn't registrated"), ("Newspapers available", " - ".join(news[1]))), 16711680, None)
-    await ctx.send(embed=rep)
+    for article in rep: await ctx.send(embed=article)
 
 
 @client.event
