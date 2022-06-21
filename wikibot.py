@@ -21,7 +21,11 @@ client = commands.Bot(command_prefix=".", intents=intents)
 slash = discord_slash.SlashCommand(client, sync_commands=True)
 token = os.environ["token"]
 __version__ = "2.2.0"
-guild_ids = [658281779408535552]
+
+guild_ids = []
+for guild in client.guilds
+    guild_ids.append(guild.id)
+print(guild_ids)
 
 def make_embed(title, description, field, color, image, in_line = False, thumb = False):
     if not color: color = randint(0, 16777215)
