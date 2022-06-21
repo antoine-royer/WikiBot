@@ -1,5 +1,5 @@
 # --------------------------------------------------
-# WikiBot (Version 2.1.2)
+# WikiBot (Version 2.2.0)
 # by Sha-chan~
 # last version released on the 21 of June 2022
 #
@@ -20,8 +20,7 @@ intents = discord.Intents.all()
 client = commands.Bot(command_prefix=".", intents=intents)
 slash = discord_slash.SlashCommand(client, sync_commands=True)
 token = os.environ["token"]
-__version__ = "2.1.2"
-guild_ids = [658281779408535552]
+__version__ = "2.2.0"
 
 
 def make_embed(title, description, field, color, image, in_line = False, thumb = False):
@@ -37,31 +36,31 @@ def make_embed(title, description, field, color, image, in_line = False, thumb =
     return answer
 
 
-@slash.slash(name="r", description="Random selection of articles from Wikipedia", guild_ids=guild_ids)
+@slash.slash(name="r", description="Random selection of articles from Wikipedia")
 async def r(ctx, research: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
     await ctx.send(embed=make_embed(*wl.page_random(msg_content[0][2:])))
 
 
-@slash.slash(name="p_plus", description="Get an article with an automatic correction on the title", guild_ids=guild_ids)
+@slash.slash(name="p_plus", description="Get an article with an automatic correction on the title")
 async def p_plus(ctx, research: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
     await ctx.send(embed=make_embed(*wl.page_read(msg_content[0][2:], True)))
 
 
-@slash.slash(name="p", description="Get an article from Wikipedia with the exact title", guild_ids=guild_ids)
+@slash.slash(name="p", description="Get an article from Wikipedia with the exact title")
 async def p(ctx, research: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
     await ctx.send(embed=make_embed(*wl.page_read(msg_content[0][2:])))
 
 
-@slash.slash(name="s", description="Make a research on wikipedia", guild_ids=guild_ids)
+@slash.slash(name="s", description="Make a research on wikipedia")
 async def s(ctx, research: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
     await ctx.send(embed=make_embed(*wl.page_search(msg_content[0][2:])))
 
 
-@slash.slash(name="w", description="Get the weather", guild_ids=guild_ids)
+@slash.slash(name="w", description="Get the weather")
 async def w(ctx, city_name: str, forecast: int=1):
     rep, img, day, timezone, datetime = wl.weather(city_name, forecast)
     if not rep:
@@ -76,7 +75,7 @@ async def w(ctx, city_name: str, forecast: int=1):
     await ctx.send(embed=rep)
 
 
-@slash.slash(name="n", description="Get some news", guild_ids=guild_ids)
+@slash.slash(name="n", description="Get some news")
 async def n(ctx, newspaper: str, nb_article: int=1, is_selected: bool=False):
     name, news, selection = wl.get_news(newspaper, nb_article, is_selected)
     embed_title = f"**{name}**"
@@ -92,88 +91,6 @@ async def n(ctx, newspaper: str, nb_article: int=1, is_selected: bool=False):
         rep = make_embed(embed_title, "Unknown newspaper", (("Error", "The newspaper requested isn't registrated"), ("Newspapers available", " - ".join(news[1]))), 16711680, None)
     for article in rep: await ctx.send(embed=article)
 
-
-@client.event
-async def on_message(message):
-    return
-
-    msg_content, rep = message.content, None
-
-    if message.author == client.user: return None
-
-    try:
-        if msg_content[0] != "/": return None
-    except:
-        return None
-
-    msg_content = list(msg_content[1:].partition(";"))
-
-    msg_content[0] = msg_content[0].rstrip()
-
-    language = msg_content[2].strip().rstrip()
-    
-    if not language:
-        language = "en"
-    wl.wikipedia.set_lang(language.split()[0])
-
-    if not msg_content[0].find("r "):
-        rep = make_embed(*wl.page_random(msg_content[0][2:]))
-        
-    elif not msg_content[0].find("p+ "):
-        rep = make_embed(*wl.page_read(msg_content[0][2:], True))
-
-    elif not msg_content[0].find("p "):
-        rep = make_embed(*wl.page_read(msg_content[0][2:]))
-
-    elif not msg_content[0].find("s "):
-        rep = make_embed(*wl.page_search(msg_content[0][2:]))
-
-    elif not msg_content[0].find("w "):
-        city_name = msg_content[0][2:]
-        rep, img, day, timezone, datetime = wl.weather(city_name, language)
-        
-        if not rep:
-            rep = make_embed("Weather", "Unknown city's name", [("Error", f"No city were found for the name : '{city_name}'. Please check the city's name.")], 16711680, None)
-        else:
-            if day == 0: day = f"today : {datetime}"
-            elif day == 1: day = f"tomorrow : {datetime}"
-            else: day = f"in {day} days : {datetime}"
-            rep = make_embed("Weather", f"{city_name} {day} ({timezone})", rep, None, img, True, True)
-
-            rep.set_footer(text = "Weather forecast provided by OpenWeather", icon_url = "https://openweathermap.org/themes/openweathermap/assets/img/logo_white_cropped.png")
-
-    elif not msg_content[0].find("n "):
-        name, news, selection = wl.get_news(msg_content[0][2:], language)
-        embed_title = f"**{name}**"
-        if news[0]:
-            news = news[0]
-            rep = []
-            if not selection:
-                for index, article in enumerate(news):
-                    rep.append(make_embed(f"{embed_title} (#{index + 1})", article[0], (("Summary", article[1]), ("Link", article[2])), None, article[3]))
-            else:
-                rep.append(make_embed(f"{embed_title} (#{selection})", news[0][0], (("Summary", news[0][1]), ("Link", news[0][2])), None, news[0][3]))
-        else:
-            rep = make_embed(embed_title, "Unknown newspaper", (("Error", "The newspaper requested isn't registrated"), ("Newspapers available", " - ".join(news[1]))), 16711680, None)
-        
-    elif msg_content[0] == "help":
-        rep = discord.Embed(title=f"Help pannel (WikiBot v{__version__})", description="List of available commands", color=randint(0, 16777215))
-        rep.add_field(name="Make a research on wikipedia", value="`/s < search_terms > [; < language >]`", inline=False)
-        rep.add_field(name="Get an article from Wikipedia with the exact title", value="`/p < title > [; < language >]`", inline=False)
-        rep.add_field(name="Get an article with an automatic correction on the title", value="`/p+ < title > [; < language >]`", inline=False)
-        rep.add_field(name="Random selection of articles from Wikipedia", value="`/r < nb > [; < language >]`", inline=False)
-        rep.add_field(name="Get some news", value="`/n < newspaper_name > [; < number_of_article > [+]]`", inline=False)
-        rep.add_field(name="Get the weather", value="`/w < city name > [; < day_of_forecast >]` for the day : 0 is today, 1 tomorrow…", inline=False)
-        rep.add_field(name="Complete documentation", value="https://github.com/Shadow15510/WikiBot/blob/master/README.md", inline=False)
-
-    if not rep: return None
-    
-    if type(rep) == str:
-        await message.channel.send(rep)
-    elif type(rep) == list:
-        for msg in rep: await message.channel.send(embed = msg)
-    else:
-        await message.channel.send(embed = rep)
 
 @client.event
 async def on_ready():
