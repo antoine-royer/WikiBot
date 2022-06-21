@@ -10,12 +10,14 @@
 import discord
 from discord.ext import commands
 import discord_slash
+
 import os
 import libs.wikibot_lib as wl
 
 from random import randint
 
-client = commands.Bot(command_prefix=".")
+intents = discord.Intents.all()
+client = commands.Bot(command_prefix=".", intents=intents)
 slash = discord_slash.SlashCommand(client, sync_commands=True)
 token = os.environ["token"]
 __version__ = "2.1.2"
