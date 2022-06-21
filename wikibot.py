@@ -62,7 +62,7 @@ async def s(ctx, research: str, language: str="en"):
 
 
 @slash.slash(name="w", description="Get the weather", guild_ids=guild_ids)
-async def w(ctx, research: str, city_name: str, forecast: int=1):
+async def w(ctx, city_name: str, forecast: int=1):
     rep, img, day, timezone, datetime = wl.weather(city_name, forecast)
     if not rep:
         rep = make_embed("Weather", "Unknown city's name", [("Error", f"No city were found for the name : '{city_name}'. Please check the city's name.")], 16711680, None)
@@ -77,7 +77,7 @@ async def w(ctx, research: str, city_name: str, forecast: int=1):
 
 
 @slash.slash(name="n", description="Get some news", guild_ids=guild_ids)
-async def n(ctx, research: str, newspaper: str, nb_article: int=1, is_selected: bool=False):
+async def n(ctx, newspaper: str, nb_article: int=1, is_selected: bool=False):
     name, news, selection = wl.get_news(newspaper, nb_article, is_selected)
     embed_title = f"**{name}**"
     if news[0]:
