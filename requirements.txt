@@ -1,4 +1,5 @@
 discord
+discord-py-slash-command
 wikipedia
 requests
 xmltodict
