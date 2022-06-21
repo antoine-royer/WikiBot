@@ -23,10 +23,6 @@ token = os.environ["token"]
 __version__ = "2.2.0"
 
 guild_ids = []
-print(client.guilds)
-for guild in client.guilds:
-    guild_ids.append(guild.id)
-print(guild_ids)
 
 def make_embed(title, description, field, color, image, in_line = False, thumb = False):
     if not color: color = randint(0, 16777215)
@@ -99,7 +95,14 @@ async def n(ctx, newspaper: str, nb_article: int=1, is_selected: bool=False):
 
 @client.event
 async def on_ready():
+    global guild_ids
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="/help"))
     print("Online.")
+
+    print(client.guilds)
+    for guild in client.guilds:
+        guild_ids.append(guild.id)
+    print(guild_ids)
+
 
 client.run(token)
