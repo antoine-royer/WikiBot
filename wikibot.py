@@ -36,7 +36,7 @@ def make_embed(title, description, field, color, image, in_line = False, thumb =
     return answer
 
 
-@slash.slash(name="test", description="This is a test")
+@slash.slash(name="test", description="This is a test", guild_ids=[658281779408535552])
 async def test(ctx):
     await ctx.send("OUI")
 
