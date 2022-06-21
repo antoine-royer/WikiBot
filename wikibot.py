@@ -37,9 +37,9 @@ def make_embed(title, description, field, color, image, in_line = False, thumb =
 
 
 @slash.slash(name="r", description="Random selection of articles from Wikipedia")
-async def r(ctx, research: str, language: str="en"):
+async def r(ctx, number: int=1, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
-    await ctx.send(embed=make_embed(*wl.page_random(research)))
+    await ctx.send(embed=make_embed(*wl.page_random(number)))
 
 
 @slash.slash(name="p_plus", description="Get an article with an automatic correction on the title")
