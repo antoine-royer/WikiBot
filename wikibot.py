@@ -14,7 +14,7 @@ import libs.wikibot_lib as wl
 from random import randint
 
 client = discord.Client(intents=discord.Intents.all())
-slash = discord_slash.SlashCommand(client, sync_commands=True)
+slash = SlashCommand(client, sync_commands=True)
 
 token = os.environ["token"]
 __version__ = "2.2.0"
