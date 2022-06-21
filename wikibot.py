@@ -42,8 +42,8 @@ async def r(ctx, number: int, language: str="en"):
     await ctx.send(embed=make_embed(*wl.page_random(number)))
 
 
-@slash.slash(name="p_plus", description="Get an article with an automatic correction on the title", guild_ids=guild_ids)
-async def p_plus(ctx, research: str, language: str="en"):
+@slash.slash(name="p-auto", description="Get an article with an automatic correction on the title", guild_ids=guild_ids)
+async def pauto(ctx, research: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
     await ctx.send(embed=make_embed(*wl.page_read(research, True)))
 
