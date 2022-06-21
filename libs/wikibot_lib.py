@@ -67,16 +67,7 @@ def list_pages(l_page, title, description, limit = 1000):
     return pages
 
 
-def page_random(nb):
-    try:
-        nb = int(nb)
-        
-        if nb < 1: nb = 1
-        elif nb > 10: nb = 10
-            
-    except:
-        nb = 1
-        
+def page_random(nb):    
     rand = wikipedia.random(nb)
     return list_pages(rand, "Random articles", f"{nb} random articles on Wikipedia", 500)
 
