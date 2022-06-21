@@ -38,7 +38,6 @@ def make_embed(title, description, field, color, image, in_line = False, thumb =
 
 @client.event
 async def on_ready():
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="/help"))
     print("Online.")
 
 
