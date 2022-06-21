@@ -40,8 +40,7 @@ def make_embed(title, description, field, color, image, in_line = False, thumb =
 async def on_ready():
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="/help"))
     print("Online.")
-    client.add_cog(WikiBot(client))
-
+    
 
 @slash.slash(name="r", description="Random selection of articles from Wikipedia", guild_ids=guild_ids)
 async def r(ctx, number: int, language: str="en"):
