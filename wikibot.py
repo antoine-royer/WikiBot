@@ -43,7 +43,7 @@ async def r(ctx, research: str, language: str="en"):
     await ctx.send(embed=make_embed(*wl.page_random(msg_content[0][2:])))
 
 
-@slash.slash(name="p+", description="Get an article with an automatic correction on the title", guild_ids=guild_ids)
+@slash.slash(name="p_plus", description="Get an article with an automatic correction on the title", guild_ids=guild_ids)
 async def p_plus(ctx, research: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
     await ctx.send(embed=make_embed(*wl.page_read(msg_content[0][2:], True)))
@@ -96,7 +96,7 @@ async def n(ctx, research: str, newspaper: str, nb_article: int=1, is_selected: 
 @client.event
 async def on_message(message):
     return
-    
+
     msg_content, rep = message.content, None
 
     if message.author == client.user: return None
