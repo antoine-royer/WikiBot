@@ -17,7 +17,7 @@ from random import randint
 
 intents = discord.Intents.all()
 client = commands.Bot(command_prefix=".", intents=intents)
-slash = discord_slash.SlashCommand(client, sync_commands=True)
+slash = discord_slash.SlashCommand(client, sync_commands=False)
 token = os.environ["token"]
 __version__ = "2.2.0"
 guild_ids = [658281779408535552, 685936220395929600, 688378964636336128, 694107785574613003, 750778113503264938, 774980578621259826, 780134704962601022]
@@ -40,7 +40,7 @@ def make_embed(title, description, field, color, image, in_line = False, thumb =
 async def on_ready():
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="/help"))
     print("Online.")
-    
+
 
 @slash.slash(name="r", description="Random selection of articles from Wikipedia", guild_ids=guild_ids)
 async def r(ctx, number: int, language: str="en"):
