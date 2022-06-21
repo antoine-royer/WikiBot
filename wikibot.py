@@ -14,13 +14,13 @@ import os
 import libs.wikibot_lib as wl
 from random import randint
 
+
 intents = discord.Intents.all()
 client = commands.Bot(command_prefix=".", intents=intents)
 slash = discord_slash.SlashCommand(client, sync_commands=True)
 token = os.environ["token"]
 __version__ = "2.2.0"
 
-guild_ids = []
 
 def make_embed(title, description, field, color, image, in_line = False, thumb = False):
     if not color: color = randint(0, 16777215)
@@ -39,7 +39,7 @@ def make_embed(title, description, field, color, image, in_line = False, thumb =
 async def on_ready():
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="/help"))
     print("Online.")
-    client.add_cog(WikiBot)
+    client.add_cog(WikiBot(client))
 
     
 class WikiBot(commands.Cog):
