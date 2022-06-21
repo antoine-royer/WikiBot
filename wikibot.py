@@ -18,7 +18,7 @@ from random import randint
 
 intents = discord.Intents.all()
 client = commands.Bot(command_prefix=".", intents=intents)
-slash = discord_slash.SlashCommand(client, sync_commands=True)
+slash = discord_slash.SlashCommand(client, sync_commands=False)
 token = os.environ["token"]
 __version__ = "2.2.0"
 
