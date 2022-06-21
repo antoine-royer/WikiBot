@@ -39,13 +39,13 @@ async def on_ready():
     print("Online.")
 
 
-@slash.slash(name="random articles", description="Random selection of articles from Wikipedia", guild_ids=guild_ids)
+@slash.slash(name="random-articles", description="Random selection of articles from Wikipedia", guild_ids=guild_ids)
 async def _random_article(ctx, number: int, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
     await ctx.send(embed=make_embed(*wl.page_random(number)))
 
 
-@slash.slash(name="advanced article", description="Get an article with an automatic correction on the title", guild_ids=guild_ids)
+@slash.slash(name="advanced-article", description="Get an article with an automatic correction on the title", guild_ids=guild_ids)
 async def _advanced_article(ctx, research: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
     await ctx.send(embed=make_embed(*wl.page_read(research, True)))
