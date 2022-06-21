@@ -14,6 +14,7 @@ import libs.wikibot_lib as wl
 from random import randint
 
 client = discord.Client()
+slash = discord.SlashCommand(client, sync_command=True)
 token = os.environ["token"]
 __version__ = "2.1.2"
 
@@ -29,6 +30,11 @@ def make_embed(title, description, field, color, image, in_line = False, thumb =
         if thumb: answer.set_thumbnail(url=image)
         else: answer.set_image(url=image)
     return answer
+
+
+@slash.slash(name="test", description="This is a test")
+async def test(ctx):
+    await ctx.send("OUI")
 
 @client.event
 async def on_message(message):
