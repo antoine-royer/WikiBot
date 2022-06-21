@@ -23,6 +23,7 @@ token = os.environ["token"]
 __version__ = "2.2.0"
 
 guild_ids = []
+print(client.guilds)
 for guild in client.guilds:
     guild_ids.append(guild.id)
 print(guild_ids)
