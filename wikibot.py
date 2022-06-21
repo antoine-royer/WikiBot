@@ -39,6 +39,7 @@ def make_embed(title, description, field, color, image, in_line = False, thumb =
 
 @slash.slash(name="r", description="Random selection of articles from Wikipedia", guild_ids=guild_ids)
 async def r(ctx, number: int, language: str="en"):
+    print(guild_ids)
     wl.wikipedia.set_lang(language.split()[0])
     await ctx.send(embed=make_embed(*wl.page_random(number)))
 
@@ -99,10 +100,8 @@ async def on_ready():
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="/help"))
     print("Online.")
 
-    print(client.guilds)
     for guild in client.guilds:
         guild_ids.append(guild.id)
-    print(guild_ids)
 
 
 client.run(token)
