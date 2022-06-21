@@ -39,25 +39,25 @@ def make_embed(title, description, field, color, image, in_line = False, thumb =
 @slash.slash(name="r", description="Random selection of articles from Wikipedia")
 async def r(ctx, research: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
-    await ctx.send(embed=make_embed(*wl.page_random(msg_content[0][2:])))
+    await ctx.send(embed=make_embed(*wl.page_random(research)))
 
 
 @slash.slash(name="p_plus", description="Get an article with an automatic correction on the title")
 async def p_plus(ctx, research: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
-    await ctx.send(embed=make_embed(*wl.page_read(msg_content[0][2:], True)))
+    await ctx.send(embed=make_embed(*wl.page_read(research, True)))
 
 
 @slash.slash(name="p", description="Get an article from Wikipedia with the exact title")
 async def p(ctx, research: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
-    await ctx.send(embed=make_embed(*wl.page_read(msg_content[0][2:])))
+    await ctx.send(embed=make_embed(*wl.page_read(research)))
 
 
 @slash.slash(name="s", description="Make a research on wikipedia")
 async def s(ctx, research: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
-    await ctx.send(embed=make_embed(*wl.page_search(msg_content[0][2:])))
+    await ctx.send(embed=make_embed(*wl.page_search(research)))
 
 
 @slash.slash(name="w", description="Get the weather")
