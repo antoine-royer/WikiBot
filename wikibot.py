@@ -66,7 +66,8 @@ async def _search(ctx, research: str, language: str="en"):
     print(rslt[2])
     print(rslt[3])
     print(rslt[4])
-    await ctx.send(embed=make_embed(rslt[0], rslt[1], rslt[2], rslt[3], rslt[4]))
+    embed = make_embed(rslt[0], rslt[1], rslt[2], rslt[3], rslt[4])
+    await ctx.send(embed=embed)
 
 
 @slash.slash(name="weather", description="Get the weather", guild_ids=guild_ids)
