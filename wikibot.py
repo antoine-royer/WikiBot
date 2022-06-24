@@ -63,7 +63,7 @@ async def _search(ctx, research: str, language: str="en"):
     rslt = wl.page_search(research)
     print(rslt)
 
-    await ctx.send(embed=make_embed(*rslt)
+    await ctx.send(embed=make_embed(*rslt))
 
 
 @slash.slash(name="weather", description="Get the weather", guild_ids=guild_ids)
