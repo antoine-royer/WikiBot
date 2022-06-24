@@ -21,11 +21,11 @@ __version__ = "2.2.0"
 guild_ids = [658281779408535552, 685936220395929600, 688378964636336128, 694107785574613003, 750778113503264938, 774980578621259826, 780134704962601022]
 
 
-def make_embed(title, description, field, color, image, in_line = False, thumb = False):
+def make_embed(title, description, fields, color, image, in_line=False, thumb=False):
     if not color: color = randint(0, 16777215)
     answer = discord.Embed(title=title, description=description, color=color)
 
-    for i in field:
+    for i in fields:
         answer.add_field(name=i[0], value=i[1], inline=in_line)
     
     if image:
@@ -61,9 +61,12 @@ async def _article(ctx, article_name: str, language: str="en"):
 async def _search(ctx, research: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
     rslt = wl.page_search(research)
-    print(rslt)
-
-    await ctx.send(embed=make_embed(*rslt))
+    print(rslt[0])
+    print(rslt[1])
+    print(rslt[2])
+    print(rslt[3])
+    print(rslt[4])
+    await ctx.send(embed=make_embed(rslt[0], rslt[1], rslt[2], rslt[3], rslt[4]))
 
 
 @slash.slash(name="weather", description="Get the weather", guild_ids=guild_ids)
