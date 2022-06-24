@@ -60,14 +60,7 @@ async def _article(ctx, article_name: str, language: str="en"):
 @slash.slash(name="search", description="Make a research on wikipedia", guild_ids=guild_ids)
 async def _search(ctx, research: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
-    rslt = wl.page_search(research)
-    print(rslt[0])
-    print(rslt[1])
-    print(rslt[2])
-    print(rslt[3])
-    print(rslt[4])
-    embed = make_embed(rslt[0], rslt[1], rslt[2], rslt[3], rslt[4])
-    await ctx.send(embed=embed)
+    await ctx.send(embed=make_embed(*wl.page_search(research)))
 
 
 @slash.slash(name="weather", description="Get the weather", guild_ids=guild_ids)
