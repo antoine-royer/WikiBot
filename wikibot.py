@@ -46,21 +46,24 @@ async def _random_article(ctx, number: int, language: str="en"):
 
 
 @slash.slash(name="advanced-article", description="Get an article with an automatic correction on the title", guild_ids=guild_ids)
-async def _advanced_article(ctx, research: str, language: str="en"):
+async def _advanced_article(ctx, article_name: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
-    await ctx.send(embed=make_embed(*wl.page_read(research, True)))
+    await ctx.send(embed=make_embed(*wl.page_read(article_name, True)))
 
 
 @slash.slash(name="article", description="Get an article from Wikipedia with the exact title", guild_ids=guild_ids)
-async def _article(ctx, research: str, language: str="en"):
+async def _article(ctx, article_name: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
-    await ctx.send(embed=make_embed(*wl.page_read(research)))
+    await ctx.send(embed=make_embed(*wl.page_read(article_name)))
 
 
 @slash.slash(name="search", description="Make a research on wikipedia", guild_ids=guild_ids)
 async def _search(ctx, research: str, language: str="en"):
     wl.wikipedia.set_lang(language.split()[0])
-    await ctx.send(embed=make_embed(*wl.page_search(research)))
+    rslt = wl.page_search(research)
+    print(rslt)
+
+    await ctx.send(embed=make_embed(*rslt)
 
 
 @slash.slash(name="weather", description="Get the weather", guild_ids=guild_ids)
@@ -89,7 +92,7 @@ async def _news(ctx, newspaper: str, nb_article: int=1, is_selected: bool=False)
             for index, article in enumerate(news):
                 rep.append(make_embed(f"{embed_title} (#{index + 1})", article[0], (("Summary", article[1]), ("Link", article[2])), None, article[3]))
         else:
-            rep.append(make_embed(f"{embed_title} (#{selection})", news[0][0], (("Summary", news[0][1]), ("Link", news[0][2])), None, news[0][3]))
+            rep.append(make_embed(f"{embed_title}", news[0][0], (("Summary", news[0][1]), ("Link", news[0][2])), None, news[0][3]))
     else:
         rep = make_embed(embed_title, "Unknown newspaper", (("Error", "The newspaper requested isn't registrated"), ("Newspapers available", " - ".join(news[1]))), 16711680, None)
     for article in rep: await ctx.send(embed=article)
